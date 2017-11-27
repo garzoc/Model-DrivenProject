@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:Codegen="http://www.eclipse.org/papyrus/Codegen/1" xmlns:PapyrusJava="http://www.eclipse.org/papyrus/PapyrusJava/1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Model xmi:id="_UrMQ4NEIEeemwZeUvu1XjQ" name="MDEProjectexample">
+    <packagedElement xmi:type="uml:Package" xmi:id="_co9mcNENEeemwZeUvu1XjQ" name="Package1">
+      <packagedElement xmi:type="uml:Class" xmi:id="_J9GEkNEKEeemwZeUvu1XjQ" name="AbstractRobotSimulator" visibility="public">
+        <generalization xmi:type="uml:Generalization" xmi:id="_x8_vUNEOEeemwZeUvu1XjQ" general="_wctoUNEOEeemwZeUvu1XjQ"/>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_DGj4UNEPEeemwZeUvu1XjQ" name="Package2">
+      <packagedElement xmi:type="uml:Class" xmi:id="_wctoUNEOEeemwZeUvu1XjQ" name="Class1">
+        <generalization xmi:type="uml:Generalization" xmi:id="_9jsFoNEOEeemwZeUvu1XjQ" general="_J9GEkNEKEeemwZeUvu1XjQ"/>
+      </packagedElement>
+    </packagedElement>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_1wzDANEMEeemwZeUvu1XjQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_1w1fQNEMEeemwZeUvu1XjQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/Codegen/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://Codegen_PROFILES/Codegen.profile.uml#_fPDsIBa-EearhdjjJ6cVzQ"/>
+    </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_1xEv0NEMEeemwZeUvu1XjQ">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_1xEv0dEMEeemwZeUvu1XjQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/PapyrusJava/1#/"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PapyrusJava_PROFILES/PapyrusJava.profile.uml#_j9REUByGEduN1bTiWJ0lyw"/>
+    </profileApplication>
+  </uml:Model>
+  <Codegen:Project xmi:id="_7J-uMNEMEeemwZeUvu1XjQ" base_Model="_UrMQ4NEIEeemwZeUvu1XjQ" generationMode="Incremental" projectName="MDEProjectexample" sourceFolder="src/main/java"/>
+  <PapyrusJava:External xmi:id="_8gdjgNENEeemwZeUvu1XjQ" name="" base_Classifier="_J9GEkNEKEeemwZeUvu1XjQ"/>
+  <PapyrusJava:Import xmi:id="_ekKc8NEPEeemwZeUvu1XjQ" manualImports="AbstractRobotSimulator" base_class="_J9GEkNEKEeemwZeUvu1XjQ" base_Classifier="_J9GEkNEKEeemwZeUvu1XjQ"/>
+</xmi:XMI>
