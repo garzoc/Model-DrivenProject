@@ -2,19 +2,22 @@ package Interfaces;
 import java.util.Set;
 
 import project.AbstractRobotSimulator;
+import project.AbstractSimulatorMonitor;
 import project.Point;
-
+import project.RobotAvatar;
 import simbad.sim.EnvironmentDescription;
-public class GUI extends AbstractRobotSimulator {
+public class GUI extends AbstractSimulatorMonitor {
 
-	public GUI( EnvironmentDescription e) {
-		super(null, null);
+	public GUI( Set<RobotAvatar> robots, EnvironmentDescription e) {
+		super(robots, e);
 		// TODO Auto-generated constructor stub
 	}
-	
-	public void update() {
-	
-		System.out.println("updating....");
+
+
+	@Override
+	public void update(AbstractRobotSimulator arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
