@@ -21,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		/*EnvironmentDescription e = new EnvironmentDescription();
+		EnvironmentDescription e = new EnvironmentDescription();
 
 		Color c = Color.GRAY;
 
@@ -51,7 +51,7 @@ public class Main {
 		
 		AbstractWall roomWall9 = new VerticalWall(0f, -5f, -3.5f, e, c);
 		
-		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);*/
+		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);
 
 		Set<RobotAvatar> robots = new HashSet<>();
 
@@ -60,16 +60,17 @@ public class Main {
 		
 		robots.add(robot1);
 		robots.add(robot2);
-		//robot2.setDestination(new Point(-3,5));
-		//robot1.setDestination(new Point(-3,5));
+		Object x=new Object();
+		x.wait();
+		robot2.setDestination(new Point(-3,5));
+		robot1.setDestination(new Point(-3,5));
 		
 			new Singleton(null);
-			
-			
+		
 			
 		
 		
-		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
 	}
 
