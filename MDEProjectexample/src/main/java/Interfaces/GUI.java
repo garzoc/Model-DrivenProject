@@ -21,9 +21,10 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 	}
 
 
-	public void onRewardPointRecieved() {
+	public void onRewardPointRecieved(int rewardPoints, int robotID) {
 		
 		
 	}
+	
 
 }
