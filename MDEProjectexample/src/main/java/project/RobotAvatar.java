@@ -1,5 +1,6 @@
 package project;
 
+import CentralStation.Singleton;
 import project.AbstractRobotSimulator;
 import project.Point;
 
@@ -18,6 +19,10 @@ public class RobotAvatar extends AbstractRobotSimulator {
 	
 			mission.start();
 		}
+		
+		Singleton.LockAccess();
+			Singleton.getCentralStation();
+		Singleton.unlockAccess();
 	}
 	
 	public void onMissionComplete() {

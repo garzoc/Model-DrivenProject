@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
+import CentralStation.CentralStation;
+import CentralStation.Singleton;
+import Interfaces.GUI;
 import project.AbstractSimulatorMonitor;
 import project.Point;
 import simbad.sim.AbstractWall;
@@ -18,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		EnvironmentDescription e = new EnvironmentDescription();
+		/*EnvironmentDescription e = new EnvironmentDescription();
 
 		Color c = Color.GRAY;
 
@@ -48,7 +51,7 @@ public class Main {
 		
 		AbstractWall roomWall9 = new VerticalWall(0f, -5f, -3.5f, e, c);
 		
-		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);
+		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);*/
 
 		Set<RobotAvatar> robots = new HashSet<>();
 
@@ -59,7 +62,14 @@ public class Main {
 		robots.add(robot2);
 		//robot2.setDestination(new Point(-3,5));
 		//robot1.setDestination(new Point(-3,5));
-		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		
+			new Singleton(null);
+			
+			
+			
+		
+		
+		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 
 	}
 

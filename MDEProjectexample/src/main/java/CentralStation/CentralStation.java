@@ -7,10 +7,16 @@ import project.RobotAvatar;
 
 public class CentralStation {
 	private RobotAvatar[] robotAvatars;
-	private final int stationID;
+	private int stationID;
+	
+	public CentralStation(){
+		stationID=0;
+		robotAvatars=null;
+	}
 	
 	protected CentralStation(int ID,int maximumNumberOfRobots){
 		stationID=ID;
+		robotAvatars=new RobotAvatar[maximumNumberOfRobots];
 	}
 	
 	public Point getRoverPosition(int robotId) {
@@ -36,5 +42,6 @@ public class CentralStation {
 	protected int getID() {
 		return this.stationID;
 	}
+	
 	
 }
