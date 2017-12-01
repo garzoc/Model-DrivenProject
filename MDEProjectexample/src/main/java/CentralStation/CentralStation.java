@@ -53,7 +53,7 @@ public class CentralStation {
 	}
 	
 	protected void setRewardPoint(int rewardPoint,int robotID) {
-		gui.onRewardPointRecieved();
+		gui.onRewardPointRecieved(rewardPoint, robotID);
 	}
 	
 }
