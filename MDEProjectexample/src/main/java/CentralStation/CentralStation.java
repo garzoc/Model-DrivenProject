@@ -2,21 +2,30 @@ package CentralStation;
 
 import java.awt.Point;
 
-import project.Mission;
+import Interfaces.Interface;
 import project.RobotAvatar;
+import rover.MissionController;
+import rover.RobotInterface;
 
 public class CentralStation {
-	private RobotAvatar[] robotAvatars;
+	private RobotInterface[] robots;
+	private Interface gui;
 	private int stationID;
+	
+	public CentralStation(Interface m,int stationID,int maximumNumberOfRobots){
+		stationID=0;
+		robots=null;
+		gui=m;
+	}
 	
 	public CentralStation(){
 		stationID=0;
-		robotAvatars=null;
+		robots=null;
 	}
 	
 	protected CentralStation(int ID,int maximumNumberOfRobots){
 		stationID=ID;
-		robotAvatars=new RobotAvatar[maximumNumberOfRobots];
+		robots=new RobotInterface[maximumNumberOfRobots];
 	}
 	
 	public Point getRoverPosition(int robotId) {
@@ -27,7 +36,7 @@ public class CentralStation {
 		
 	}
 	
-	public void attachNewRobot(RobotAvatar robot) {
+	public void attachNewRobot(RobotInterface robot) {
 		
 	}
 	
@@ -35,7 +44,7 @@ public class CentralStation {
 		return 0;
 	}
 	
-	public int setMission(int robotID,Mission mission) {
+	public int setMission(int robotID,MissionController mission) {
 		return 0;
 	}
 	
@@ -43,5 +52,8 @@ public class CentralStation {
 		return this.stationID;
 	}
 	
+	protected void setRewardPoint(int rewardPoint,int robotID) {
+		gui.onRewardPointRecieved();
+	}
 	
 }

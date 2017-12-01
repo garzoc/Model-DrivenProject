@@ -6,14 +6,14 @@ import project.Point;
 
 public class RobotAvatar extends AbstractRobotSimulator {
 	
-	private Mission mission;
+	//private Mission mission;
 	
 	public RobotAvatar(Point position, String name) {
 		super(position, name);
-		mission=null;
+		//mission=null;
 	}
 	
-	public void beginMission(Strategies strategy) {
+	/*public void beginMission(Strategies strategy) {
 		if(!this.hasMission()) {
 			mission=new Mission(strategy,this);
 	
@@ -31,7 +31,7 @@ public class RobotAvatar extends AbstractRobotSimulator {
 	
 	public boolean hasMission(){
 		return mission!=null;
-	}
+	}*/
 
 
 	@Override

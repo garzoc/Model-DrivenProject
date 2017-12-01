@@ -2,24 +2,24 @@ package CentralStation;
 
 import java.util.LinkedList;
 
-import Interfaces.GUI;
+import Interfaces.Interface;;
 
 public class Singleton {
 	
 	private static CentralStation c;
 	private static LinkedList<Thread> threads;
 	private static boolean stateLocked;
-	public Singleton(GUI m){
-		c=new CentralStation(2,6);
+	public Singleton(Interface i){
+		c=new CentralStation(i,1,4);
 		threads=new LinkedList<Thread>();
 		stateLocked=false;
 		
 	}
 	public static CentralStation getCentralStation() {
-		if(!stateLocked) {
+		//if(!stateLocked) {
 			return c;
-		}
-		return null;
+		//}
+		//return null;
 	}
 	
 	public static void LockAccess() {

@@ -1,11 +1,18 @@
 package rover;
-import project.*;
+
+import java.awt.Point;
+
+import project.LocationController;
 
 public interface RobotInterface {
 	
 	void beginMissions(Strategies str);
 	
-	boolean missionComplete(Mission mission);
+	boolean missionComplete(MissionController mission);
 	
 	boolean checkAreaAccesability(LocationController location);
+	boolean isAtPosition(Point p);
+	void setDestination(Point p);
+	
+	void onMissionComplete();
 }

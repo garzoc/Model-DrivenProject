@@ -1,8 +1,8 @@
 package rover;
 
+import java.awt.Point;
+
 import project.LocationController;
-import project.Mission;
-import project.Strategies;
 
 public class Robot implements RobotInterface {
 
@@ -13,7 +13,7 @@ public class Robot implements RobotInterface {
 	}
 
 	@Override
-	public boolean missionComplete(Mission mission) {
+	public boolean missionComplete(MissionController mission) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -23,5 +23,25 @@ public class Robot implements RobotInterface {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public boolean isAtPosition(Point p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void setDestination(Point p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMissionComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }

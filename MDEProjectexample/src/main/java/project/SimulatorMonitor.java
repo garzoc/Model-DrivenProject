@@ -21,10 +21,10 @@ public class SimulatorMonitor extends AbstractSimulatorMonitor<RobotAvatar> {
 
 	@Override
 	public void update(RobotAvatar arg0) {
-		Strategies strategy=new Strategies(null);
+		/*Strategies strategy=new Strategies(null);
 		if(arg0.getName() =="Robot 2")
 			arg0.beginMission(strategy);
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub*/
 		
 	}
 
