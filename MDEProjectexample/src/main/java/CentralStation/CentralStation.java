@@ -33,11 +33,19 @@ public class CentralStation {
 		return new Point(0,0);
 	}
 	
+	public Point isAtPostion(int robotId,Point p) {
+		return new Point(0,0);
+	}
+	
 	public void roverMoveTo(int robotID,Point position) {
 		
 	}
 	
 	public void attachNewRobot(RobotInterface robot) {
+		
+	}
+	
+	public void attachNewRobotIncremental(RobotInterface robot) {
 		
 	}
 	
