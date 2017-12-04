@@ -71,6 +71,7 @@ public class Main {
 			k.setID(4);
 			
 			System.out.println(Singleton.getCentralStation().getID());
+			Point[] x= {new Point(2,2),new Point(4,4)};
 		
 			
 		

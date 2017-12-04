@@ -15,6 +15,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	@Override
 	public void beginMission(Strategies str) {
 		// TODO Auto-generated method stub
+		MissionController m=new MissionController(str,this);
+		m.start();
 		
 	}
 
@@ -33,7 +35,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	@Override
 	public boolean isAtPosition(Point p) {
 		// TODO Auto-generated method stub
-		return false;
+		return super.isAtPosition(new project.Point(p.getX(), p.getY()));
 	}
 
 	
@@ -47,6 +49,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	@Override
 	public void setDestination(Point p) {
 		// TODO Auto-generated method stub
+		
 		super.setDestination(new project.Point(p.getX(), p.getY()));
 		
 	}
