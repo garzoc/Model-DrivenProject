@@ -45,8 +45,12 @@ public class CentralStation {
 		return 0;
 	}
 	
-	public int setMission(int robotID,Strategies mission) {
+	public int setMission(Strategies mission) {
 		return 0;
+	}
+	
+	public void setDestination(Point p) {
+	
 	}
 	
 	protected int getID() {
