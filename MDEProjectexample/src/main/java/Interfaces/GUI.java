@@ -1,6 +1,8 @@
 package Interfaces;
 import java.awt.Point;
+import rover.Robot;
 import java.util.Set;
+
 
 import CentralStation.Singleton;
 import project.AbstractRobotSimulator;
@@ -12,17 +14,10 @@ import simbad.sim.EnvironmentDescription;
 public class GUI extends AbstractSimulatorMonitor implements Interface{
 
 	
-	public GUI( Set<RobotAvatar> robots, EnvironmentDescription e, Strategies plan) {
+	public GUI( Set<Robot> robots, EnvironmentDescription e) {
 		super(robots, e);
 		
-		Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
-//		Point[] pl2 =
-//		pl[2] = new Point(3,3);
-//		pl[3] = new Point(-3,3);
-		Strategies plan1 = new Strategies(pl1);
-		
-		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
-		
+
 		
 	}
 	

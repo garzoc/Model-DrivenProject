@@ -8,7 +8,9 @@ import CentralStation.CentralStation;
 import CentralStation.Singleton;
 import Interfaces.GUI;
 import project.AbstractSimulatorMonitor;
-import project.Point;
+import java.awt.Point;
+import rover.Robot;
+import rover.Strategies;
 import simbad.sim.AbstractWall;
 import simbad.sim.Boundary;
 import simbad.sim.EnvironmentDescription;
@@ -21,7 +23,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		/*EnvironmentDescription e = new EnvironmentDescription();
+		EnvironmentDescription e = new EnvironmentDescription();
 
 		Color c = Color.GRAY;
 
@@ -53,25 +55,44 @@ public class Main {
 		
 		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);
 
-		Set<RobotAvatar> robots = new HashSet<>();
+//		Set<RobotAvatar> robots = new HashSet<>();
 
-		RobotAvatar robot1 = new RobotAvatar(new Point(0, 0), "Robot 1");
-		RobotAvatar robot2 = new RobotAvatar(new Point(1, 3), "Robot 2");
+//		RobotAvatar robot1 = new RobotAvatar(new Point(0, 0), "Robot 1");
+//		RobotAvatar robot2 = new RobotAvatar(new Point(1, 3), "Robot 2");
+		
+		Set<Robot> robots = new HashSet<>();
+
+		
+		Robot robot1 = new Robot(new Point(0, 0), "Robot 1");
+		Robot robot2 = new Robot(new Point(1, 3), "Robot 2");
 		
 		robots.add(robot1);
 		robots.add(robot2);
-		Object x=new Object();
-		x.wait();
-		robot2.setDestination(new Point(-3,5));
-		robot1.setDestination(new Point(-3,5));*/
+//		robot2.setDestination(new Point(-3,5));
+//		robot1.setDestination(new Point(-3,5));
 		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-			new Singleton(null);
-			
-			CentralStation k=Singleton.getCentralStation();
-			k.setID(4);
+		
+		new Singleton(new GUI(robots, e));
+		
+		Singleton.getCentralStation().attachNewRobotIncremental(robot1);
+		Singleton.getCentralStation().attachNewRobotIncremental(robot2);
+		
+		Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
+//		Point[] pl2 =
+//		pl[2] = new Point(3,3);
+//		pl[3] = new Point(-3,3);
+		Strategies plan1 = new Strategies(pl1);
+		
+		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
+		
+		
+/*	
+		CentralStation k=Singleton.getCentralStation();
+		k.setID(4);
 			
 			System.out.println(Singleton.getCentralStation().getID());
 			Point[] x= {new Point(2,2),new Point(4,4)};
+*/
 		
 			
 		
