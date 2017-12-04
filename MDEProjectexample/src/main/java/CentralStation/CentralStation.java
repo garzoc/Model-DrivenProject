@@ -49,8 +49,8 @@ public class CentralStation {
 		return 0;
 	}
 	
-	public void setDestination(Point p) {
-	
+	public void setDestination(int roverID,Point p) {
+		
 	}
 	
 	protected int getID() {
