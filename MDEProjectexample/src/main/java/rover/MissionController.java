@@ -2,16 +2,18 @@ package rover;
 
 import java.awt.Point;
 
+import CentralStation.Singleton;
+
 
 
 public class MissionController extends Thread {
 
 	private final Strategies strategy;
-	private final Robot robot;
+	private final int robotID;
 	
-	MissionController(Strategies strategy,Robot robot){
+	MissionController(Strategies strategy,int robotID){
 		this.strategy=strategy;
-		this.robot=robot;
+		this.robotID=robotID;
 	}
 	
 	
@@ -22,7 +24,8 @@ public class MissionController extends Thread {
 			
 			if(robot.isAtPosition(missionPoints[missionProgress])){
 				missionProgress++;
-				robot.setDestination(missionPoints[missionProgress]);
+				Singleton.getCentralStation().setDestination(missionPoints[missionProgress]);
+				
 			}
     	   
 		}
