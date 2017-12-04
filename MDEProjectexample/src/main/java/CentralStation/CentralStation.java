@@ -6,6 +6,7 @@ import Interfaces.Interface;
 import project.RobotAvatar;
 import rover.MissionController;
 import rover.RobotInterface;
+import rover.Strategies;
 
 public class CentralStation {
 	private RobotInterface[] robots;
@@ -44,7 +45,7 @@ public class CentralStation {
 		return 0;
 	}
 	
-	public int setMission(int robotID,MissionController mission) {
+	public int setMission(int robotID,Strategies mission) {
 		return 0;
 	}
 	

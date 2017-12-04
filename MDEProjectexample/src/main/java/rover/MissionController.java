@@ -16,7 +16,7 @@ public class MissionController extends Thread {
 	
 	
 	public void run() {
-		Point[] missionPoints = strategy.getPoints();
+		Point[] missionPoints = strategy.getOriginalPoints();
 		int missionProgress = 0;
 		while(missionProgress!=missionPoints.length) {
 			
