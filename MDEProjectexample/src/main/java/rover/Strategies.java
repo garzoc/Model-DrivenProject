@@ -7,7 +7,7 @@ public class Strategies {
 	Point[] unsortedPoints;
 	Point[] optimizedPath;
 	
-	Strategies (Point[] path){
+	public Strategies (Point[] path){
 		unsortedPoints=path;
 	}
 	

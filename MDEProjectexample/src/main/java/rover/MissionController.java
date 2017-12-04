@@ -22,13 +22,13 @@ public class MissionController extends Thread {
 		int missionProgress = 0;
 		while(missionProgress!=missionPoints.length) {
 			
-			if(robot.isAtPosition(missionPoints[missionProgress])){
+			if(Singleton.getCentralStation().getRobot(robotID).isAtPosition(missionPoints[missionProgress])){
 				missionProgress++;
-				Singleton.getCentralStation().setDestination(missionPoints[missionProgress]);
+				Singleton.getCentralStation().getRobot(robotID).setDestination(missionPoints[missionProgress]);
 				
 			}
     	   
 		}
-		robot.onMissionComplete();
+		Singleton.getCentralStation().getRobot(robotID).onMissionComplete();
 	}
 }
