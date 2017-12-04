@@ -2,12 +2,18 @@ package rover;
 
 import java.awt.Point;
 
+import project.AbstractRobotSimulator;
 import project.LocationController;
 
-public class Robot implements RobotInterface {
+public class Robot extends AbstractRobotSimulator implements RobotInterface {
+
+	public Robot(project.Point position, String name) {
+		super(position, name);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
-	public void beginMissions(Strategies str) {
+	public void beginMission(Strategies str) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -30,17 +36,22 @@ public class Robot implements RobotInterface {
 		return false;
 	}
 
-	@Override
-	public void setDestination(Point p) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void onMissionComplete() {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setDestination(Point p) {
+		// TODO Auto-generated method stub
+		super.setDestination(new project.Point(p.getX(), p.getY()));
+		
+	}
+
+
 
 
 
