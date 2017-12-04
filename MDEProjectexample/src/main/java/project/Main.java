@@ -73,17 +73,18 @@ public class Main {
 		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 		
 		new Singleton(new GUI(robots, e));
-		
+		Singleton.getCentralStation().getID();
 		Singleton.getCentralStation().attachNewRobotIncremental(robot1);
 		Singleton.getCentralStation().attachNewRobotIncremental(robot2);
 		
-		Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
+		
+		//Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
 //		Point[] pl2 =
 //		pl[2] = new Point(3,3);
 //		pl[3] = new Point(-3,3);
-		Strategies plan1 = new Strategies(pl1);
+		//Strategies plan1 = new Strategies(pl1);
 		
-		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
+		//Singleton.getCentralStation().getRobot(0).beginMission(plan1);
 		
 		
 /*	

@@ -16,7 +16,7 @@ public class CentralStation {
 	
 	public CentralStation(Interface m,int stationID,int maximumNumberOfRobots){
 		stationID=0;
-		robots=null;
+		robots=new RobotInterface[maximumNumberOfRobots];
 		gui=m;	
 	}
 	
