@@ -7,8 +7,8 @@ import project.LocationController;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
-	public Robot(project.Point position, String name) {
-		super(position, name);
+	public Robot(Point position, String name) {
+		super(new project.Point(position.getX(), position.getY()), name);
 		// TODO Auto-generated constructor stub
 	}
 

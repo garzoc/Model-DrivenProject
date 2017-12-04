@@ -10,13 +10,14 @@ import rover.Strategies;
 
 public class CentralStation {
 	private RobotInterface[] robots;
+	private int numberOfAttachedRobots=0;
 	private Interface gui;
 	private int stationID;
 	
 	public CentralStation(Interface m,int stationID,int maximumNumberOfRobots){
 		stationID=0;
 		robots=null;
-		gui=m;
+		gui=m;	
 	}
 	
 	public CentralStation(){
@@ -30,8 +31,7 @@ public class CentralStation {
 	}
 	
 	public RobotInterface getRobot(int robotID) {
-		return robots[robotID];
-		
+		return robots[robotID];	
 	}
 	
 	public void attachNewRobot(RobotInterface robot) {
@@ -39,7 +39,10 @@ public class CentralStation {
 	}
 	
 	public void attachNewRobotIncremental(RobotInterface robot) {
-		
+		if(robots.length!=numberOfAttachedRobots) {
+			
+			robots[numberOfAttachedRobots++]=robot;
+		}
 	}
 	
 	public int getNumberOfRobots() {
