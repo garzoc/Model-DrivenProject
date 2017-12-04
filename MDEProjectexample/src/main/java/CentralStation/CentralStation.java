@@ -29,15 +29,8 @@ public class CentralStation {
 		robots=new RobotInterface[maximumNumberOfRobots];
 	}
 	
-	public Point getRoverPosition(int robotId) {
-		return new Point(0,0);
-	}
-	
-	public Point isAtPostion(int robotId,Point p) {
-		return new Point(0,0);
-	}
-	
-	public void roverMoveTo(int robotID,Point position) {
+	public RobotInterface getRobot(int robotID) {
+		return robots[robotID];
 		
 	}
 	
@@ -52,6 +45,15 @@ public class CentralStation {
 	public int getNumberOfRobots() {
 		return 0;
 	}
+	protected int getID() {
+		return this.stationID;
+	}
+	
+	protected void setRewardPoint(int rewardPoint,int robotID) {
+		gui.onRewardPointRecieved(rewardPoint, robotID);
+	}
+	
+	
 	
 	public int setMission(Strategies mission) {
 		return 0;
@@ -61,12 +63,21 @@ public class CentralStation {
 		
 	}
 	
-	protected int getID() {
-		return this.stationID;
+	
+	public Point getRoverPosition(int robotId) {
+		return new Point(0,0);
 	}
 	
-	protected void setRewardPoint(int rewardPoint,int robotID) {
-		gui.onRewardPointRecieved(rewardPoint, robotID);
+	public Point isAtPostion(int robotId,Point p) {
+		return new Point(0,0);
 	}
+	
+	public void roverMoveTo(int robotID,Point position) {
+		
+	}
+	
+	
+	
+	
 	
 }
