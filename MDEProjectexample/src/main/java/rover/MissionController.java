@@ -1,16 +1,17 @@
 package rover;
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import CentralStation.Singleton;
 
 
 
-public class MissionController extends Thread {
+public class MissionController implements Runnable {
 
 	private final Strategies strategy;
 	private final RobotInterface robot;
-	
+	private volatile int tick=0;
 	MissionController(Strategies strategy,RobotInterface robot){
 		this.strategy=strategy;
 		this.robot=robot;
@@ -18,17 +19,24 @@ public class MissionController extends Thread {
 	
 	
 	public void run() {
-		Point[] missionPoints = strategy.getOriginalPoints();
+		Point2D.Double[] missionPoints = strategy.getOriginalPoints();
 		int missionProgress = 0;
 		robot.setDestination(missionPoints[missionProgress]);
+		
 		while(missionProgress!=missionPoints.length) {
-			System.out.println("running");//impotant
+			
+			//System.out.println("robot x "+robot.getRobotPosition().getX()+" y pos is "+robot.getRobotPosition().getY());//impotant
+			tick=missionProgress;
 			if(robot.isAtPosition(missionPoints[missionProgress])){
-				
-				if(missionProgress+1!=missionPoints.length)robot.setDestination(missionPoints[++missionProgress]);
+				System.out.println("is at Position");
+				if(missionProgress+1!=missionPoints.length) {
+					robot.setDestination(missionPoints[++missionProgress]);
+				}else {
+					break;
+				}
 			}
     	   
-		}
+		}this.
 		robot.onMissionComplete();
 	}
 }

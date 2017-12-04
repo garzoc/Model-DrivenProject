@@ -1,6 +1,7 @@
 package rover;
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import project.LocationController;
 
@@ -13,8 +14,9 @@ public interface RobotInterface {
 	boolean missionComplete(MissionController mission);
 	
 	boolean checkAreaAccesability(LocationController location);
-	boolean isAtPosition(Point p);
-	void setDestination(Point p);
+	boolean isAtPosition(Point2D.Double p);
+	void setDestination(Point2D.Double p);
+	Point2D.Double getRobotPosition();
 	
 	void onMissionComplete();
 }
