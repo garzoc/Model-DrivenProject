@@ -45,8 +45,12 @@ public class CentralStation {
 	public int getNumberOfRobots() {
 		return 0;
 	}
-	protected int getID() {
+	public int getID() {
 		return this.stationID;
+	}
+	
+	public void setID(int id) {
+		this.stationID=id;
 	}
 	
 	protected void setRewardPoint(int rewardPoint,int robotID) {
@@ -54,7 +58,7 @@ public class CentralStation {
 	}
 	
 	
-	
+/*	
 	public int setMission(Strategies mission) {
 		return 0;
 	}
@@ -75,7 +79,7 @@ public class CentralStation {
 	public void roverMoveTo(int robotID,Point position) {
 		
 	}
-	
+*/	
 	
 	
 	

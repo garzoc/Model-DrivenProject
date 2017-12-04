@@ -2,7 +2,8 @@ package CentralStation;
 
 import java.util.LinkedList;
 
-import Interfaces.Interface;;
+import Interfaces.Interface;
+import project.Point;;
 
 public class Singleton {
 	
@@ -14,7 +15,15 @@ public class Singleton {
 		threads=new LinkedList<Thread>();
 		stateLocked=false;
 		
+		/*Point s=new Point(1,1);
+		set(s);
+		System.out.println(s.getX());*/
+		
 	}
+	
+	/* public void set(Point p) {
+		p.setX(4);	
+	}*/
 	public static CentralStation getCentralStation() {
 		//if(!stateLocked) {
 			return c;
@@ -33,7 +42,6 @@ public class Singleton {
 				e.printStackTrace();
 			}
 		}
-		
 	}
 	
 	public static void unlockAccess() {

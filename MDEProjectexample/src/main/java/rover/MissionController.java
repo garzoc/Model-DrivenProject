@@ -9,11 +9,11 @@ import CentralStation.Singleton;
 public class MissionController extends Thread {
 
 	private final Strategies strategy;
-	private final int robotID;
+	private final RobotInterface robot;
 	
-	MissionController(Strategies strategy,int robotID){
+	MissionController(Strategies strategy,RobotInterface robot){
 		this.strategy=strategy;
-		this.robotID=robotID;
+		this.robot=robot;
 	}
 	
 	
@@ -22,13 +22,13 @@ public class MissionController extends Thread {
 		int missionProgress = 0;
 		while(missionProgress!=missionPoints.length) {
 			
-			if(Singleton.getCentralStation().getRobot(robotID).isAtPosition(missionPoints[missionProgress])){
+			if(robot.isAtPosition(missionPoints[missionProgress])){
 				missionProgress++;
-				Singleton.getCentralStation().getRobot(robotID).setDestination(missionPoints[missionProgress]);
+				robot.setDestination(missionPoints[missionProgress]);
 				
 			}
     	   
 		}
-		Singleton.getCentralStation().getRobot(robotID).onMissionComplete();
+		robot.onMissionComplete();
 	}
 }

@@ -21,7 +21,7 @@ public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		EnvironmentDescription e = new EnvironmentDescription();
+		/*EnvironmentDescription e = new EnvironmentDescription();
 
 		Color c = Color.GRAY;
 
@@ -63,15 +63,22 @@ public class Main {
 		Object x=new Object();
 		x.wait();
 		robot2.setDestination(new Point(-3,5));
-		robot1.setDestination(new Point(-3,5));
-		
+		robot1.setDestination(new Point(-3,5));*/
+		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 			new Singleton(null);
+			
+			CentralStation k=Singleton.getCentralStation();
+			k.setID(4);
+			
+			System.out.println(Singleton.getCentralStation().getID());
 		
 			
 		
 		
-		AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		
 
 	}
+	
+	
 
 }
