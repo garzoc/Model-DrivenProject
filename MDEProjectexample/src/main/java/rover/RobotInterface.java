@@ -6,6 +6,8 @@ import project.LocationController;
 
 public interface RobotInterface {
 	
+
+	
 	void beginMission(Strategies str);
 	
 	boolean missionComplete(MissionController mission);

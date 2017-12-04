@@ -7,16 +7,21 @@ import project.LocationController;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
+	MissionController m;
+	
 	public Robot(Point position, String name) {
 		super(new project.Point(position.getX(), position.getY()), name);
+		m=null;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void beginMission(Strategies str) {
 		// TODO Auto-generated method stub
-		MissionController m=new MissionController(str,this);
-		m.start();
+		if(m==null) {
+			MissionController m=new MissionController(str,this);
+			m.start();
+		}
 		
 	}
 
@@ -43,7 +48,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	@Override
 	public void onMissionComplete() {
 		// TODO Auto-generated method stub
-		
+		System.out.println("mission completed");
 	}
 
 	@Override
