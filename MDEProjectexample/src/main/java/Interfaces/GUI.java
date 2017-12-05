@@ -9,7 +9,7 @@ import project.AbstractRobotSimulator;
 import project.AbstractSimulatorMonitor;
 
 import project.RobotAvatar;
-import rover.Strategies;
+import rover.Strategy;
 import simbad.sim.EnvironmentDescription;
 public class GUI extends AbstractSimulatorMonitor implements Interface{
 

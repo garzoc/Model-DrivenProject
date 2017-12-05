@@ -3,12 +3,12 @@ package rover;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-public class Strategies {
+public class Strategy {
 	
 	Point2D.Double[] unsortedPoints;
 	Point2D.Double[] optimizedPath;
 	
-	public Strategies (Point2D.Double[] path){
+	public Strategy (Point2D.Double[] path){
 		unsortedPoints=path;
 	}
 	

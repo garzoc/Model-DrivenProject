@@ -17,7 +17,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 
 	@Override
-	public void beginMission(Strategies str) {
+	public void beginMission(Strategy str) {
 		// TODO Auto-generated method stub
 		if(m==null) {
 			MissionController m=new MissionController(str,this);

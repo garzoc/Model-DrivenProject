@@ -12,7 +12,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import rover.Robot;
-import rover.Strategies;
+import rover.Strategy;
 import simbad.sim.AbstractWall;
 import simbad.sim.Boundary;
 import simbad.sim.EnvironmentDescription;
@@ -85,8 +85,8 @@ public class Main {
 //		Point[] pl2 =
 //		pl[2] = new Point(3,3);
 //		pl[3] = new Point(-3,3);
-		Strategies plan1 = new Strategies(pl1);
-		Strategies plan2 = new Strategies(pl2);
+		Strategy plan1 = new Strategy(pl1);
+		Strategy plan2 = new Strategy(pl2);
 		
 		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
 		System.out.println("runnong second robot");

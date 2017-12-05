@@ -9,10 +9,10 @@ import CentralStation.Singleton;
 
 public class MissionController implements Runnable {
 
-	private final Strategies strategy;
+	private final Strategy strategy;
 	private final RobotInterface robot;
 	private volatile int tick=0;
-	MissionController(Strategies strategy,RobotInterface robot){
+	MissionController(Strategy strategy,RobotInterface robot){
 		this.strategy=strategy;
 		this.robot=robot;
 	}

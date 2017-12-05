@@ -6,7 +6,7 @@ import Interfaces.Interface;
 import project.RobotAvatar;
 import rover.MissionController;
 import rover.RobotInterface;
-import rover.Strategies;
+import rover.Strategy;
 
 public class CentralStation {
 	private RobotInterface[] robots;

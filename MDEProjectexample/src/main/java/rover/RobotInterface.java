@@ -9,7 +9,7 @@ public interface RobotInterface {
 	
 
 	
-	void beginMission(Strategies str);
+	void beginMission(Strategy str);
 	
 	boolean missionComplete(MissionController mission);
 	
