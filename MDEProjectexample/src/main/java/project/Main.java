@@ -65,8 +65,8 @@ public class Main {
 		Set<Robot> robots = new HashSet<>();
 
 		
-		Robot robot1 = new Robot(new Point(3, 5), "Robot 1");
-		Robot robot2 = new Robot(new Point(1, 2), "Robot 2");
+		Robot robot1 = new Robot(new Point(-3, 7), "Robot 1");
+		Robot robot2 = new Robot(new Point(-3, -7), "Robot 2");
 		
 		robots.add(robot1);
 		robots.add(robot2);
@@ -79,15 +79,18 @@ public class Main {
 		Singleton.getCentralStation().attachNewRobotIncremental(robot1);
 		Singleton.getCentralStation().attachNewRobotIncremental(robot2);
 		
-		Point2D.Double[] pl1 = {new Point2D.Double(3,-3), new Point2D.Double(4,-3), new Point2D.Double(-7,-3)};
-		
+		Point2D.Double[] pl1 = {new Point2D.Double(-3,3), new Point2D.Double(-3,-4), new Point2D.Double(-3,-7)};
+		Point2D.Double[] pl2 = {new Point2D.Double(-3,-4), new Point2D.Double(3,-4), new Point2D.Double(3,-7)};
 		//Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
 //		Point[] pl2 =
 //		pl[2] = new Point(3,3);
 //		pl[3] = new Point(-3,3);
 		Strategies plan1 = new Strategies(pl1);
+		Strategies plan2 = new Strategies(pl2);
 		
 		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
+		System.out.println("runnong second robot");
+		Singleton.getCentralStation().getRobot(1).beginMission(plan2);
 		//robot2.setDestination(new Point(5,5));
 		
 /*	
