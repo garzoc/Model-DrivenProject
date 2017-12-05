@@ -45,7 +45,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public boolean isAtPosition(Point2D.Double p) {
 		// TODO Auto-generated method stub
 		Point2D.Double cp= this.getRobotPosition();
-		double robotRadius=0.91;
+		double robotRadius=0.8;
 		//cp.x=Math.round(cp.getX()*1000)/1000;
 		//cp.y=Math.round(cp.getY()*1000)/1000;
 		
@@ -55,9 +55,9 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		boolean o=cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius && cp.getY()-p.getY()<robotRadius &&  cp.getY()-p.getY()>-robotRadius?true:false;
 		
 		//System.out.println("difference x is " +(cp.getX()-p.getX()));
-		System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
-		System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
-		System.out.println(o);
+		//System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
+		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
+		//System.out.println(o);
 		
 		//return cp.getY()==p.getY()&&cp.getX()==p.getX();
 		return o;
