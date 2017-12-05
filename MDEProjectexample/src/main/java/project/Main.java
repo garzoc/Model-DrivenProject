@@ -80,7 +80,7 @@ public class Main {
 		Singleton.getCentralStation().attachNewRobotIncremental(robot2);
 		
 		Point2D.Double[] pl1 = {new Point2D.Double(-3,3), new Point2D.Double(-3,-4), new Point2D.Double(-3,-7)};
-		Point2D.Double[] pl2 = {new Point2D.Double(-3,-2), new Point2D.Double(3,-4), new Point2D.Double(3,-7)};
+		Point2D.Double[] pl2 = {new Point2D.Double(-3,-2), new Point2D.Double(3,-2), new Point2D.Double(3,-7)};
 		//Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
 //		Point[] pl2 =
 //		pl[2] = new Point(3,3);

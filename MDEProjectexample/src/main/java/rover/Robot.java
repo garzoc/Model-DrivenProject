@@ -46,7 +46,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public boolean isAtPosition(Point2D.Double p) {
 		// TODO Auto-generated method stub
 		Point2D.Double cp= this.getRobotPosition();
-		double robotRadius=0.91;
+		double robotRadius=0.61;
 		//cp.x=Math.round(cp.getX()*1000)/1000;
 		//cp.y=Math.round(cp.getY()*1000)/1000;
 		
