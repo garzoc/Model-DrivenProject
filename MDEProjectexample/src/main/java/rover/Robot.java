@@ -22,7 +22,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		if(m==null) {
 			MissionController m=new MissionController(str,this);
 			new Thread(m).start();
-			m.run();
+			//m.run();
+	
 		}
 		
 	}
