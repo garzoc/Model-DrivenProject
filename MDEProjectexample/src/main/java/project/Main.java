@@ -67,9 +67,13 @@ public class Main {
 		
 		Robot robot1 = new Robot(new Point(-3, 7), "Robot 1");
 		Robot robot2 = new Robot(new Point(-3, -7), "Robot 2");
+		Robot robot3 = new Robot(new Point(3, -7), "Robot 3");
+		Robot robot4 = new Robot(new Point(3, 7), "Robot 4");
 		
 		robots.add(robot1);
 		robots.add(robot2);
+		robots.add(robot3);
+		robots.add(robot4);
 //		robot2.setDestination(new Point(-3,5));
 //		robot1.setDestination(new Point(-3,5));
 		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
@@ -78,19 +82,29 @@ public class Main {
 		
 		Singleton.getCentralStation().attachNewRobotIncremental(robot1);
 		Singleton.getCentralStation().attachNewRobotIncremental(robot2);
+		Singleton.getCentralStation().attachNewRobotIncremental(robot3);
+		Singleton.getCentralStation().attachNewRobotIncremental(robot4);
 		
 		Point2D.Double[] pl1 = {new Point2D.Double(-3,3), new Point2D.Double(-3,-4), new Point2D.Double(-3,-7)};
-		Point2D.Double[] pl2 = {new Point2D.Double(-3,-2), new Point2D.Double(3,-2), new Point2D.Double(3,-7)};
+		Point2D.Double[] pl2 = {new Point2D.Double(-3,-2.5), new Point2D.Double(3,-2.5), new Point2D.Double(3,-7)};
+		Point2D.Double[] pl3 = {new Point2D.Double(3,-3), new Point2D.Double(3,3), new Point2D.Double(3,7)};
+		Point2D.Double[] pl4 = {new Point2D.Double(3,2.5), new Point2D.Double(-3,2.5), new Point2D.Double(-3,7)};
 		//Point[] pl1 = {new Point(3,-3), new Point(-3,-3), new Point(-7,-3)};
 //		Point[] pl2 =
 //		pl[2] = new Point(3,3);
 //		pl[3] = new Point(-3,3);
 		Strategy plan1 = new Strategy(pl1);
 		Strategy plan2 = new Strategy(pl2);
+		Strategy plan3 = new Strategy(pl3);
+		Strategy plan4 = new Strategy(pl4);
 		
 		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
 		System.out.println("runnong second robot");
 		Singleton.getCentralStation().getRobot(1).beginMission(plan2);
+		System.out.println("running thrid robot");
+		Singleton.getCentralStation().getRobot(2).beginMission(plan3);
+		System.out.println("running thrid robot");
+		Singleton.getCentralStation().getRobot(3).beginMission(plan4);
 		//robot2.setDestination(new Point(5,5));
 		
 /*	
