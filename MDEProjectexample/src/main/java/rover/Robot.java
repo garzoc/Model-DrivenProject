@@ -10,8 +10,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
 	MissionController m;
 	
-	public Robot(Point position, String name) {
-		super(new project.Point(position.getX(), position.getY()), name);
+	public Robot(Point2D.Double position, String name) {
+		super(convertCoord(position), name);
 		m=null;
 		// TODO Auto-generated constructor stub
 	}
@@ -27,6 +27,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		}
 		
 	}
+	
+	
 	
 	
 
@@ -56,8 +58,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		boolean o=cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius && cp.getY()-p.getY()<robotRadius &&  cp.getY()-p.getY()>-robotRadius?true:false;
 		
 		//System.out.println("difference x is " +(cp.getX()-p.getX()));
-		//System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
-		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
+		System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
+		System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
 		//System.out.println(o);
 		
 		//return cp.getY()==p.getY()&&cp.getX()==p.getX();
@@ -79,16 +81,21 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void setDestination(Point2D.Double p) {
 		// TODO Auto-generated method stub
 		
-		super.setDestination(new project.Point(p.getX(), p.getY()));
+		super.setDestination(convertCoord(p));
 		
 	}
+	
+	private static project.Point convertCoord(Point2D.Double p){
+		return new project.Point(-p.getY(),-p.getX());
+	}
+	
 
 	@Override
 	public Point2D.Double getRobotPosition() {
 		// TODO Auto-generated method stub
 		project.Point p=super.getPosition();
 		
-		return new Point2D.Double(((double)Math.round(p.getX()*1000))/1000,((double)Math.round(p.getZ()*1000)/1000));
+		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),-((double)Math.round(p.getX()*1000))/1000);
 	}
 
 

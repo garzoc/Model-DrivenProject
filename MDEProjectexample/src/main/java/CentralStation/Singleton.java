@@ -11,7 +11,7 @@ public class Singleton {
 	private static LinkedList<Thread> threads;
 	private static boolean stateLocked;
 	public Singleton(Interface i){
-		c=new CentralStation(i,1,4);
+		c=new CentralStation(i,4);
 		threads=new LinkedList<Thread>();
 		stateLocked=false;
 		

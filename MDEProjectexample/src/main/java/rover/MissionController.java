@@ -36,7 +36,7 @@ public class MissionController implements Runnable {
 				}
 			}
     	   
-		}this.
+		}
 		robot.onMissionComplete();
 	}
 }

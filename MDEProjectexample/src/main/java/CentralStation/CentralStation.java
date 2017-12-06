@@ -13,21 +13,25 @@ public class CentralStation {
 	private int numberOfAttachedRobots=0;
 	private Interface gui;
 	private int stationID;
+	private LocationFinder finder;
 	
-	public CentralStation(Interface m,int stationID,int maximumNumberOfRobots){
+	public CentralStation(Interface m,int maximumNumberOfRobots){
 		stationID=0;
 		robots=new RobotInterface[maximumNumberOfRobots];
-		gui=m;	
+		gui=m;
+		finder=null;
 	}
 	
 	public CentralStation(){
 		stationID=0;
 		robots=null;
+		finder=null;
 	}
 	
 	protected CentralStation(int ID,int maximumNumberOfRobots){
 		stationID=ID;
 		robots=new RobotInterface[maximumNumberOfRobots];
+		finder=null;
 	}
 	
 	public RobotInterface getRobot(int robotID) {
@@ -35,14 +39,15 @@ public class CentralStation {
 	}
 	
 	public void attachNewRobot(RobotInterface robot) {
-		
-	}
-	
-	public void attachNewRobotIncremental(RobotInterface robot) {
 		if(robots.length!=numberOfAttachedRobots) {
 			
 			robots[numberOfAttachedRobots++]=robot;
 		}
+	}
+
+	
+	public LocationFinder getLocationFinder() {
+		return finder;
 	}
 	
 	public int getNumberOfRobots() {

@@ -17,7 +17,6 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 	public GUI( Set<Robot> robots, EnvironmentDescription e) {
 		super(robots, e);
 		
-
 		
 	}
 	
@@ -25,7 +24,6 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 	@Override
 	public void update(AbstractRobotSimulator arg0) {
 		
-
 		
 	}
 
