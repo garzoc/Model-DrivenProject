@@ -93,16 +93,13 @@ public class Main {
 		Point2D.Double[] pl3 = {new Point2D.Double(-3,3), new Point2D.Double(3,3), new Point2D.Double(7,3)};
 		Point2D.Double[] pl4 = {new Point2D.Double(2.5,3), new Point2D.Double(2.5,-3), new Point2D.Double(7,-3)};
 		
-//		Point[] pl2 =
-//		pl[2] = new Point(3,3);
-//		pl[3] = new Point(-3,3);
+
 		Strategy plan1 = new Strategy(pl1);
 		Strategy plan2 = new Strategy(pl2);
 		Strategy plan3 = new Strategy(pl3);
 		Strategy plan4 = new Strategy(pl4);
 		
-		//Point2D.Double[] pl10 = {new Point2D.Double(4,2),new Point2D.Double(2,-5)};
-		//Singleton.getCentralStation().getRobot(0).beginMission(new Strategy(pl10));
+		
 		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
 		System.out.println("runnong second robot");
 		Singleton.getCentralStation().getRobot(1).beginMission(plan2);
