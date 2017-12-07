@@ -9,23 +9,28 @@ public class LocationController {
 	
 	
 	
-	LocationController(double x,double y,double width,double height){
+	public LocationController(double x,double y,double width,double height){
 		Point2D.Double[] b= {new Point2D.Double(x,y),new Point2D.Double(width,height)};
 		this.boundries=b;
 	}
 	
 	public void LockArea() {
-		
+		stateLocked = true;
+	}
+	public void UnlockArea() {
+		stateLocked = false;
 	}
 	
-	public void LocationIsAccessbile() {
-		
+	public boolean LocationIsAccessbile() {
+		return !stateLocked;
 	}
 	
 	public void robotOnEnter() {
-	
+		numberOfRobotsInside ++;
 	}
-	
+	public void robotOnLeave() {
+		numberOfRobotsInside --;
+	}
 	public double getX() {
 		return boundries[0].getX();
 	}

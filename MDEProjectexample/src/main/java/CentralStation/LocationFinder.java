@@ -4,14 +4,14 @@ import java.awt.geom.Point2D;
 
 public class LocationFinder {
 	private LocationController[] controllers;
-	int numberOfAttachedControllers=0;
+	int numberOfAttachedControllers = 0;
 	public LocationFinder(int maxNumberOfController){
-		controllers=new LocationController[maxNumberOfController];
+		controllers = new LocationController[maxNumberOfController];
 	}
 	
 	public LocationFinder(LocationController[] c){
-		controllers=c;
-		numberOfAttachedControllers=c.length;
+		controllers = c;
+		numberOfAttachedControllers = c.length;
 	}
 	
 	public LocationController getLocationContoller(Point2D.Double p) {

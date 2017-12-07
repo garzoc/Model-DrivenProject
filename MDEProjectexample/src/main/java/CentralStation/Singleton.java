@@ -10,8 +10,9 @@ public class Singleton {
 	private static CentralStation c;
 	private static LinkedList<Thread> threads;
 	private static boolean stateLocked;
-	public Singleton(Interface i){
-		c=new CentralStation(i,4);
+	public Singleton(Interface i, LocationFinder finder){
+
+		c=new CentralStation(i, finder,4);
 		threads=new LinkedList<Thread>();
 		stateLocked=false;
 		

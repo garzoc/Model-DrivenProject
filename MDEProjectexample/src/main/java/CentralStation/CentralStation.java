@@ -15,18 +15,13 @@ public class CentralStation {
 	private int stationID;
 	private LocationFinder finder;
 	
-	public CentralStation(Interface m,int maximumNumberOfRobots){
+	public CentralStation(Interface i, LocationFinder finder,int maximumNumberOfRobots){
 		stationID=0;
 		robots=new RobotInterface[maximumNumberOfRobots];
-		gui=m;
-		finder=null;
+		gui = i;
+		this.finder = finder;
 	}
 	
-	public CentralStation(){
-		stationID=0;
-		robots=null;
-		finder=null;
-	}
 	
 	protected CentralStation(int ID,int maximumNumberOfRobots){
 		stationID=ID;
