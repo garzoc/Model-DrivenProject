@@ -4,7 +4,7 @@ import rover.Robot;
 import java.util.Set;
 
 
-import CentralStation.Singleton;
+import CentralStation.GET;
 import project.AbstractRobotSimulator;
 import project.AbstractSimulatorMonitor;
 

@@ -1,6 +1,6 @@
 package project;
 
-import CentralStation.Singleton;
+import CentralStation.GET;
 import project.AbstractRobotSimulator;
 import project.Point;
 

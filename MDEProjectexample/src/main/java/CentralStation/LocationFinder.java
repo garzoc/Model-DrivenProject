@@ -10,8 +10,11 @@ public class LocationFinder {
 	}
 	
 	public LocationFinder(LocationController[] c){
-		controllers = c;
-		numberOfAttachedControllers = c.length;
+		controllers = new LocationController[c.length];
+		for(int i=0;i<c.length;i++) {
+			this.attachNewController(c[i]);
+		}
+		
 	}
 	
 	public LocationController getLocationContoller(Point2D.Double p) {
@@ -25,8 +28,15 @@ public class LocationFinder {
 		return null;
 	}
 	
+	public void attachNewControllers(LocationController[] c) {
+		for(int i=0;i<c.length;i++) {
+			attachNewController(c[i]);
+		}
+	}
+	
 	public boolean attachNewController(LocationController p) {
 		if(numberOfAttachedControllers!=controllers.length) {
+			p.setID(numberOfAttachedControllers);
 			controllers[numberOfAttachedControllers++]=p;
 			return true;
 		}

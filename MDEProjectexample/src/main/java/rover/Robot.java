@@ -21,7 +21,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		// TODO Auto-generated method stub
 		if(m==null) {
 			MissionController m=new MissionController(str,this);
-			new Thread(m).start();
+			m.start();
+			//new Thread(m).start();
 			//m.run();
 	
 		}
@@ -29,14 +30,6 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 	
 	
-	
-	
-
-	@Override
-	public boolean missionComplete(MissionController mission) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean checkAreaAccesability(LocationController location) {
@@ -51,20 +44,14 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		double robotRadius=0.61;
 		//cp.x=Math.round(cp.getX()*1000)/1000;
 		//cp.y=Math.round(cp.getY()*1000)/1000;
-		
-		//cp.x=Math.round(cp.getX()*10)/10;
-		//cp.y=Math.round(cp.getY()*10)/10;
+
 		
 		boolean o=cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius && cp.getY()-p.getY()<robotRadius &&  cp.getY()-p.getY()>-robotRadius?true:false;
 		
-		//System.out.println("difference x is " +(cp.getX()-p.getX()));
-		System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
-		System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
-		//System.out.println(o);
+		//System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
+		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
 		
-		//return cp.getY()==p.getY()&&cp.getX()==p.getX();
 		return o;
-		
 		
 		//return super.isAtPosition(new project.Point(p.getX(), p.getY()));
 	}
@@ -86,7 +73,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 	
 	private static project.Point convertCoord(Point2D.Double p){
-		return new project.Point(p.getY(),-p.getX());
+		return new project.Point(-p.getY(),-p.getX());
 	}
 	
 
@@ -95,7 +82,13 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		// TODO Auto-generated method stub
 		project.Point p=super.getPosition();
 		
-		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),((double)Math.round(p.getX()*1000))/1000);
+		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),-((double)Math.round(p.getX()*1000))/1000);
+	}
+
+	@Override
+	public void onNewRoomEnter() {
+		// TODO Auto-generated method stub
+		System.out.println("hi a new room");
 	}
 
 

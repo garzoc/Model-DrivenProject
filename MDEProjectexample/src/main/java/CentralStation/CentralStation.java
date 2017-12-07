@@ -41,7 +41,7 @@ public class CentralStation {
 	}
 
 	
-	public LocationFinder getLocationFinder() {
+	public LocationFinder LocationFinder() {
 		return finder;
 	}
 	

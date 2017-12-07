@@ -7,7 +7,7 @@ import java.util.Set;
 import CentralStation.CentralStation;
 import CentralStation.LocationFinder;
 import CentralStation.LocationController;
-import CentralStation.Singleton;
+import CentralStation.GET;
 import Interfaces.GUI;
 import project.AbstractSimulatorMonitor;
 import java.awt.Point;
@@ -79,13 +79,15 @@ public class Main {
 //		robot2.setDestination(new Point(-3,5));
 //		robot1.setDestination(new Point(-3,5));
 		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
+		LocationFinder f=new LocationFinder(4);
+		f.attachNewControllers(controllers);
 		
-		new Singleton(new GUI(robots, e), new LocationFinder(controllers));
+		new GET(new GUI(robots, e), new LocationFinder(controllers));
 		
-		Singleton.getCentralStation().attachNewRobot(robot1);
-		Singleton.getCentralStation().attachNewRobot(robot2);
-		Singleton.getCentralStation().attachNewRobot(robot3);
-		Singleton.getCentralStation().attachNewRobot(robot4);
+		GET.CentralStation().attachNewRobot(robot1);
+		GET.CentralStation().attachNewRobot(robot2);
+		GET.CentralStation().attachNewRobot(robot3);
+		GET.CentralStation().attachNewRobot(robot4);
 		
 		//plans need to be rewritten with new coordinates
 		Point2D.Double[] pl1 = {new Point2D.Double(3,-3), new Point2D.Double(-4,-3), new Point2D.Double(-7,-3)};
@@ -100,13 +102,13 @@ public class Main {
 		Strategy plan4 = new Strategy(pl4);
 		
 		
-		Singleton.getCentralStation().getRobot(0).beginMission(plan1);
+		GET.CentralStation().getRobot(0).beginMission(plan1);
 		System.out.println("runnong second robot");
-		Singleton.getCentralStation().getRobot(1).beginMission(plan2);
+		GET.CentralStation().getRobot(1).beginMission(plan2);
 		System.out.println("running thrid robot");
-		Singleton.getCentralStation().getRobot(2).beginMission(plan3);
+		GET.CentralStation().getRobot(2).beginMission(plan3);
 		System.out.println("running thrid robot");
-		Singleton.getCentralStation().getRobot(3).beginMission(plan4);
+		GET.CentralStation().getRobot(3).beginMission(plan4);
 		//robot2.setDestination(new Point(5,5));
 		
 /*	
