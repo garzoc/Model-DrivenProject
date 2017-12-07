@@ -65,7 +65,7 @@ public class Main {
 //		RobotAvatar robot2 = new RobotAvatar(new Point(1, 3), "Robot 2");
 		
 		Set<Robot> robots = new HashSet<>();
-		//LocationController[] controllers = {new LocationController(-5.0,0.0,5.0,5.0), new LocationController(0.0,0.0,5.0,5.0) };
+		LocationController[] controllers = {new LocationController(-5,0,5,5), new LocationController(0,0,5,5), new LocationController(-5,-5,5,5), new LocationController(0,-5,5,5) };
 		
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
 		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
@@ -80,8 +80,8 @@ public class Main {
 //		robot1.setDestination(new Point(-3,5));
 		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
 		
-		//new Singleton(new GUI(robots, e), new LocationFinder(), );
-		//Singleton.getCentralStation().
+		new Singleton(new GUI(robots, e), new LocationFinder(controllers));
+		
 		Singleton.getCentralStation().attachNewRobot(robot1);
 		Singleton.getCentralStation().attachNewRobot(robot2);
 		Singleton.getCentralStation().attachNewRobot(robot3);
