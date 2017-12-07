@@ -86,7 +86,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 	
 	private static project.Point convertCoord(Point2D.Double p){
-		return new project.Point(-p.getY(),-p.getX());
+		return new project.Point(p.getY(),-p.getX());
 	}
 	
 
@@ -95,7 +95,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		// TODO Auto-generated method stub
 		project.Point p=super.getPosition();
 		
-		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),-((double)Math.round(p.getX()*1000))/1000);
+		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),((double)Math.round(p.getX()*1000))/1000);
 	}
 
 
