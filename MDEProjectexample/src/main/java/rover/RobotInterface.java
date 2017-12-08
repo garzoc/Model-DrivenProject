@@ -18,6 +18,6 @@ public interface RobotInterface {
 	void setDestination(Point2D.Double p);
 	Point2D.Double getRobotPosition();
 	
-	void onNewRoomEnter(LocationController lc);
+	void onNewRoomEnter(int roomID);
 	void onMissionComplete();
 }

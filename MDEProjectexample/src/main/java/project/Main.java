@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import CentralStation.CentralStation;
-import CentralStation.LocationFinder;
+import CentralStation.Environment;
 import CentralStation.LocationController;
 import CentralStation.GET;
 import Interfaces.GUI;
@@ -76,13 +76,9 @@ public class Main {
 		robots.add(robot2);
 		robots.add(robot3);
 		robots.add(robot4);
-//		robot2.setDestination(new Point(-3,5));
-//		robot1.setDestination(new Point(-3,5));
-		//AbstractSimulatorMonitor controller = new SimulatorMonitor(robots, e);
-		LocationFinder f=new LocationFinder(4);
-		f.attachNewControllers(controllers);
+
 		
-		new GET(new GUI(robots, e), new LocationFinder(controllers));
+		new GET(new GUI(robots, e), new Environment(controllers));
 		
 		GET.CentralStation().attachNewRobot(robot1);
 		GET.CentralStation().attachNewRobot(robot2);
@@ -106,7 +102,7 @@ public class Main {
 		System.out.println("runnong second robot");
 		GET.CentralStation().getRobot(1).beginMission(plan2);
 		System.out.println("running thrid robot");
-		GET.CentralStation().getRobot(2).beginMission(plan3);
+		//GET.CentralStation().getRobot(2).beginMission(plan3);
 		System.out.println("running thrid robot");
 		GET.CentralStation().getRobot(3).beginMission(plan4);
 		//robot2.setDestination(new Point(5,5));

@@ -11,7 +11,7 @@ public class GET {
 	private static volatile LinkedList<Lock> locks;
 	private static volatile boolean stateLocked;
 	
-	public GET(Interface i, LocationFinder finder){
+	public GET(Interface i, Environment finder){
 
 		c=new CentralStation(i, finder,4);
 		locks=new LinkedList<Lock>();
@@ -29,26 +29,18 @@ public class GET {
 		//return null;
 	}
 	
-	public static void LockAccess() {
+	public static void Lock() {
+		//System.out.println(stateLocked);
 		if(stateLocked) {
 			Lock l=new Lock();
 			locks.add(l);
 			l.lock();	
-			stateLocked=false;
 		}
+		stateLocked=true;
 	}
 	
-	public static void stop()  {
-		/*try {
-			k=t;
-			t.wait(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-	}
 	
-	public static void UnlockAccess() {
+	public static void Unlock() {
 		stateLocked=false;
 		Lock lock;
 		if(null!=(lock=locks.poll())){

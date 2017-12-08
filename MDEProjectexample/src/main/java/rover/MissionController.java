@@ -19,7 +19,7 @@ public class MissionController extends Thread {
 		this.strategy=strategy;
 		this.robot=robot;
 		LocationController cl;
-		if((cl=GET.CentralStation().LocationFinder().getLocationContoller(robot.getRobotPosition()))!=null) {
+		if((cl=GET.CentralStation().environment.getLocationController(robot.getRobotPosition()))!=null) {
 			locationID=cl.getID();
 		}else {
 			locationID=-1;
@@ -30,20 +30,22 @@ public class MissionController extends Thread {
 		Point2D.Double[] missionPoints = strategy.getOriginalPoints();
 		int missionProgress = 0;
 		robot.setDestination(missionPoints[missionProgress]);
-		LocationController lc=GET.CentralStation().LocationFinder().getLocationContoller(robot.getRobotPosition());
+		LocationController lc=GET.CentralStation().environment.getLocationController(robot.getRobotPosition());
+		
 		boolean controllerExists=false;
 		while(missionProgress!=missionPoints.length) {
 			tick=missionProgress;
 			
-			lc=GET.CentralStation().LocationFinder().getLocationContoller(robot.getRobotPosition());
-			checkForNewRoom(lc);
+			lc=GET.CentralStation().environment.getLocationController(robot.getRobotPosition());
+			onRoomEnter(lc);
 			
 			//System.out.println("robot x "+robot.getRobotPosition().getX()+" y pos is "+robot.getRobotPosition().getY());//impotant
-					
-			if(robot.isAtPosition(missionPoints[missionProgress])){
+			
+			char val=(char) (missionPoints.length>missionProgress+1?1:0);
+			if(robot.isAtPosition(missionPoints[missionProgress]) && checkBeforeEnter(missionPoints[val+missionProgress])){
 				//Singleton.LockAccess();
 				//Singleton.UnlockAccess();
-				System.out.println("is at Position");
+				//System.out.println("is at Position");
 				if(missionProgress+1!=missionPoints.length) {
 					robot.setDestination(missionPoints[++missionProgress]);
 				}else {
@@ -55,12 +57,28 @@ public class MissionController extends Thread {
 		robot.onMissionComplete();
 	}
 	
-	private void checkForNewRoom(LocationController lc) {
-		
-		if(lc!=null && lc.getID()!=locationID) {
-			robot.onNewRoomEnter(lc);
-			locationID=lc.getID();
+	private void onRoomEnter(LocationController newRoom) {
+		if(isNewRoom(newRoom)) {
+			robot.onNewRoomEnter(newRoom.getID());
+			newRoom.LockArea();
+			LocationController nlc;
+			if ((nlc=GET.CentralStation().environment.getControllerByID(locationID))!=null) nlc.UnlockArea();
+				locationID=newRoom.getID();
 		}
+	}
+	
+	private boolean isNewRoom(LocationController r) {
+		if(r!=null && r.getID()!=locationID) return true;
+		return false;
+	}
+	
+	private boolean checkBeforeEnter(Point2D.Double p) {
+		LocationController lc=GET.CentralStation().environment.getLocationController(p);
+		
+		if(isNewRoom(lc)) {
+			return lc.LocationIsAccessbile(); 
+		}
+		return true;
 	}
 	
 	

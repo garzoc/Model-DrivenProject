@@ -1,6 +1,7 @@
 package CentralStation;
 
 import java.awt.Point;
+import java.awt.geom.Point2D;
 
 import Interfaces.Interface;
 import project.RobotAvatar;
@@ -13,20 +14,20 @@ public class CentralStation {
 	private int numberOfAttachedRobots=0;
 	private Interface gui;
 	private int stationID;
-	private LocationFinder finder;
+	public final Environment environment;
 	
-	public CentralStation(Interface i, LocationFinder finder,int maximumNumberOfRobots){
+	public CentralStation(Interface i, Environment finder,int maximumNumberOfRobots){
 		stationID=0;
 		robots=new RobotInterface[maximumNumberOfRobots];
 		gui = i;
-		this.finder = finder;
+		this.environment = finder;
 	}
 	
 	
 	protected CentralStation(int ID,int maximumNumberOfRobots){
 		stationID=ID;
 		robots=new RobotInterface[maximumNumberOfRobots];
-		finder=null;
+		environment=null;
 	}
 	
 	public RobotInterface getRobot(int robotID) {
@@ -41,9 +42,13 @@ public class CentralStation {
 	}
 
 	
-	public LocationFinder LocationFinder() {
+	/*public Environment environment() {
 		return finder;
-	}
+	}*/
+	
+	/*public LocationController getLocationController(Point2D.Double p) {
+		return finder.getLocationController(p);
+	}*/
 	
 	public int getNumberOfRobots() {
 		return 0;

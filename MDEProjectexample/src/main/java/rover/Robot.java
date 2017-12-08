@@ -57,9 +57,9 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 	
 	@Override
-	public void onNewRoomEnter(LocationController lc) {
+	public void onNewRoomEnter(int roomID) {
 		// TODO Auto-generated method stub
-		System.out.println("hi a new room"+lc.getID());
+		//System.out.println("hi a new room"+lc.getID());
 	}
 
 	@Override
