@@ -4,7 +4,8 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import project.AbstractRobotSimulator;
-import CentralStation.LocationController;
+import CentralStation.GET;
+import CentralStation.RoomController;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
@@ -52,20 +53,28 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
 	@Override
 	public void onMissionComplete() {
-		// TODO Auto-generated method stub
 		System.out.println("mission completed");
 	}
 	
 	@Override
-	public void onNewRoomEnter(int roomID) {
-		// TODO Auto-generated method stub
-		//System.out.println("hi a new room"+lc.getID());
+	public void onNewRoomEnter(int newRoomID,int oldRoomID) {
+		//System.out.println("hi a new room"+newRoomID+" vs "+oldRoomID);
+		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea();
+		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea();
+	}
+	
+	@Override
+	public void onAreaLeave(int oldRoomID) {
+		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea();
+	}
+	
+	@Override
+	public void onAreaEnter(int newRoomID) {
+		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea();	
 	}
 
 	@Override
-	public void setDestination(Point2D.Double p) {
-		// TODO Auto-generated method stub
-		
+	public void setDestination(Point2D.Double p) {		
 		super.setDestination(convertCoord(p));
 		
 	}

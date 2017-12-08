@@ -4,20 +4,22 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import CentralStation.Lock;
-import CentralStation.LocationController;
+import CentralStation.RoomController;
 public interface RobotInterface {
 	
 	
 
 	
-	void beginMission(Strategy str);
+	public void beginMission(Strategy str);
 	
 
 	
-	boolean isAtPosition(Point2D.Double p);
-	void setDestination(Point2D.Double p);
-	Point2D.Double getRobotPosition();
+	public boolean isAtPosition(Point2D.Double p);
+	public void setDestination(Point2D.Double p);
+	public Point2D.Double getRobotPosition();
 	
-	void onNewRoomEnter(int roomID);
-	void onMissionComplete();
+	public void onNewRoomEnter(int newRoomID,int oldRoomID);
+	public void onAreaLeave(int oldRoomID);
+	public void onAreaEnter(int newRoomID);
+	public void onMissionComplete();
 }
