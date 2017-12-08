@@ -4,8 +4,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import CentralStation.Lock;
-import project.LocationController;
-
+import CentralStation.LocationController;
 public interface RobotInterface {
 	
 	
@@ -15,13 +14,10 @@ public interface RobotInterface {
 	
 
 	
-	boolean checkAreaAccesability(LocationController location);
 	boolean isAtPosition(Point2D.Double p);
 	void setDestination(Point2D.Double p);
-	
-	void onNewRoomEnter();
-	
 	Point2D.Double getRobotPosition();
 	
+	void onNewRoomEnter(LocationController lc);
 	void onMissionComplete();
 }

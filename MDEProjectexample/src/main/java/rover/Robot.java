@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import project.AbstractRobotSimulator;
-import project.LocationController;
+import CentralStation.LocationController;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
@@ -29,13 +29,6 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		
 	}
 	
-	
-
-	@Override
-	public boolean checkAreaAccesability(LocationController location) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public boolean isAtPosition(Point2D.Double p) {
@@ -46,12 +39,11 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		//cp.y=Math.round(cp.getY()*1000)/1000;
 
 		
-		boolean o=cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius && cp.getY()-p.getY()<robotRadius &&  cp.getY()-p.getY()>-robotRadius?true:false;
+		return cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius && cp.getY()-p.getY()<robotRadius &&  cp.getY()-p.getY()>-robotRadius;
 		
 		//System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
 		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
 		
-		return o;
 		
 		//return super.isAtPosition(new project.Point(p.getX(), p.getY()));
 	}
@@ -62,6 +54,12 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void onMissionComplete() {
 		// TODO Auto-generated method stub
 		System.out.println("mission completed");
+	}
+	
+	@Override
+	public void onNewRoomEnter(LocationController lc) {
+		// TODO Auto-generated method stub
+		System.out.println("hi a new room"+lc.getID());
 	}
 
 	@Override
@@ -85,11 +83,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),-((double)Math.round(p.getX()*1000))/1000);
 	}
 
-	@Override
-	public void onNewRoomEnter() {
-		// TODO Auto-generated method stub
-		System.out.println("hi a new room");
-	}
+	
 
 
 

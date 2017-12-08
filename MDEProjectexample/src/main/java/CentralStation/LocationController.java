@@ -40,19 +40,20 @@ public class LocationController {
 	public void robotOnLeave() {
 		numberOfRobotsInside --;
 	}
-	public double getX() {
+	
+	protected double getX() {
 		return boundries[0].getX();
 	}
 	
-	public double getY() {
+	protected double getY() {
 		return boundries[0].getY();
 	}
 	
-	public double getWidth() {
+	protected double getWidth() {
 		return boundries[1].getX();
 	}
 	
-	public double getHeight() {
+	protected double getHeight() {
 		return boundries[1].getY();
 	}
 	

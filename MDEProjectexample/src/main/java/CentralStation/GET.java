@@ -33,7 +33,7 @@ public class GET {
 		if(stateLocked) {
 			Lock l=new Lock();
 			locks.add(l);
-			l.doWait();	
+			l.lock();	
 			stateLocked=false;
 		}
 	}
