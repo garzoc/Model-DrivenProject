@@ -45,7 +45,7 @@ public class MissionController extends Thread {
 			char val=(char) (missionPoints.length>missionProgress+1?1:0);
 			//check if the robot has reached the Point and if next room is locked 
 			if(robot.isAtPosition(missionPoints[missionProgress]) && checkBeforeEnter(missionPoints[val+missionProgress])){
-				//If mission is finished continue the mission
+				//If mission is not finished continue the mission
 				if(missionProgress+1!=missionPoints.length) {
 					robot.setDestination(missionPoints[++missionProgress]);
 				}else {//otherwise break the loop 
