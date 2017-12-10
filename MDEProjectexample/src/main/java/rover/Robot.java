@@ -55,24 +55,24 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void onMissionComplete() {
 		System.out.println("mission completed");
 	}
-	
+	//Leave a old room and then enter a new room
 	@Override
 	public void onNewRoomEnter(int newRoomID,int oldRoomID) {
 		//System.out.println("hi a new room"+newRoomID+" vs "+oldRoomID);
 		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea();
 		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea();
 	}
-	
+	//Leave a room and then enter outside
 	@Override
 	public void onAreaLeave(int oldRoomID) {
 		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea();
 	}
-	
+	//Enter a room from outside
 	@Override
 	public void onAreaEnter(int newRoomID) {
 		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea();	
 	}
-
+	//Tell the robot go to Point p
 	@Override
 	public void setDestination(Point2D.Double p) {		
 		super.setDestination(convertCoord(p));

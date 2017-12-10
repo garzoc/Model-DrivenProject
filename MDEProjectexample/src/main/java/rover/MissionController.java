@@ -58,15 +58,19 @@ public class MissionController extends Thread {
 	}
 	//
 	private void onRoomEnter(LocationController newRoom) {
-		if(switchedRooms(newRoom)) {		
-				if (isRoom(newRoom)) { 
+		//if the robot has entered a new area and if that area is a room
+		if(switchedLocation(newRoom)) {		
+				//if its a new room, UNlock the old room and Lock the new room
+				if (isRoom(newRoom)) {
 					if(isRoom(GET.CentralStation().environment.getControllerByID(locationID))) {
 						robot.onNewRoomEnter(newRoom.getID(),locationID);
 					}else {
+						//otherwise, robot is entering the new room from outside
+						//lock the new room 
 						robot.onAreaEnter(newRoom.getID());
-					}
+					}//update the locationID to the current  room 
 					locationID=newRoom.getID();
-				}else {
+				}else {//the robot left a room to the outside
 					robot.onAreaLeave(locationID);
 					locationID=-1;
 				}
@@ -80,7 +84,7 @@ public class MissionController extends Thread {
 	}
 	
 	
-	private boolean switchedRooms(LocationController r) {
+	private boolean switchedLocation(LocationController r) {
 		
 		if((isRoom(r)  && r.getID()!=locationID) || (!isRoom(r) && locationID!=-1)) {
 			return true;
