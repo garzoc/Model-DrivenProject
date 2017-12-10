@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 
 import project.AbstractRobotSimulator;
 import CentralStation.GET;
-import CentralStation.RoomController;
+import CentralStation.LocationController;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 

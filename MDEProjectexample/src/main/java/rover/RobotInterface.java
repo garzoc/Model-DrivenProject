@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import CentralStation.Lock;
-import CentralStation.RoomController;
+import CentralStation.LocationController;
 public interface RobotInterface {
 	
 	

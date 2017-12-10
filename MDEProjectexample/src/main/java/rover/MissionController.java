@@ -3,7 +3,7 @@ package rover;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-import CentralStation.RoomController;
+import CentralStation.LocationController;
 import CentralStation.GET;
 
 
@@ -18,41 +18,46 @@ public class MissionController extends Thread {
 	MissionController(Strategy strategy,RobotInterface robot){
 		this.strategy=strategy;
 		this.robot=robot;
-		RoomController cl;
+		LocationController cl;
 		if((cl=GET.CentralStation().environment.getLocationController(robot.getRobotPosition()))!=null) {
 			locationID=cl.getID();
 		}else {
 			locationID=-1;
 		}
 	}
-	
+
+	//Robot running function 
 	public void run() {
 		Point2D.Double[] missionPoints = strategy.getOriginalPoints();
 		int missionProgress = 0;
 		robot.setDestination(missionPoints[missionProgress]);
-		RoomController lc=GET.CentralStation().environment.getLocationController(robot.getRobotPosition());
+		LocationController lc;
 		
 		//boolean controllerExists=false;
-		while(missionProgress!=missionPoints.length) {
+		//as long as the robot is DONE with the mission, keep looping
+		boolean missionHasFinished=false; 
+		while(!missionHasFinished) {
 			tick=missionProgress;
-			
+			//get the current location of the robot
 			lc=GET.CentralStation().environment.getLocationController(robot.getRobotPosition());
 			onRoomEnter(lc);
 						
 			char val=(char) (missionPoints.length>missionProgress+1?1:0);
+			//check if the robot has reached the Point and if next room is locked 
 			if(robot.isAtPosition(missionPoints[missionProgress]) && checkBeforeEnter(missionPoints[val+missionProgress])){
+				//If mission is finished continue the mission
 				if(missionProgress+1!=missionPoints.length) {
 					robot.setDestination(missionPoints[++missionProgress]);
-				}else {
-					break;
+				}else {//otherwise break the loop 
+					missionHasFinished=true;
 				}
 			}
     	   
 		}
 		robot.onMissionComplete();
 	}
-	
-	private void onRoomEnter(RoomController newRoom) {
+	//
+	private void onRoomEnter(LocationController newRoom) {
 		if(switchedRooms(newRoom)) {		
 				if (isRoom(newRoom)) { 
 					if(isRoom(GET.CentralStation().environment.getControllerByID(locationID))) {
@@ -69,13 +74,13 @@ public class MissionController extends Thread {
 		}
 	}
 	
-	private boolean isRoom(RoomController r) {
+	private boolean isRoom(LocationController r) {
 		if(r!=null) return true;
 		return false;
 	}
 	
 	
-	private boolean switchedRooms(RoomController r) {
+	private boolean switchedRooms(LocationController r) {
 		
 		if((isRoom(r)  && r.getID()!=locationID) || (!isRoom(r) && locationID!=-1)) {
 			return true;
@@ -84,9 +89,9 @@ public class MissionController extends Thread {
 	}
 	
 	private boolean checkBeforeEnter(Point2D.Double p) {
-		RoomController lc=GET.CentralStation().environment.getLocationController(p);
+		LocationController lc=GET.CentralStation().environment.getLocationController(p);
 		
-		if(isRoom(lc)) {
+		if(isRoom(lc)&& locationID != lc.getID()) {
 			return lc.LocationIsAccessbile(); 
 		}
 		return true;

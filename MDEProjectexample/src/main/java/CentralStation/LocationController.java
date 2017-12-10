@@ -2,7 +2,7 @@ package CentralStation;
 
 import java.awt.geom.Point2D;
 
-public class RoomController {
+public class LocationController {
 	private Point2D.Double[] boundries;
 	private boolean stateLocked=false;
 	private int numberOfRobotsInside=0;
@@ -10,7 +10,7 @@ public class RoomController {
 	
 	
 	
-	public RoomController(double x,double y,double width,double height){
+	public LocationController(double x,double y,double width,double height){
 		Point2D.Double[] b= {new Point2D.Double(x,y),new Point2D.Double(width,height)};
 		this.boundries=b;
 	}

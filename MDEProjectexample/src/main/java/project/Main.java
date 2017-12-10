@@ -6,7 +6,7 @@ import java.util.Set;
 
 import CentralStation.CentralStation;
 import CentralStation.Environment;
-import CentralStation.RoomController;
+import CentralStation.LocationController;
 import CentralStation.GET;
 import Interfaces.GUI;
 import project.AbstractSimulatorMonitor;
@@ -65,7 +65,7 @@ public class Main {
 //		RobotAvatar robot2 = new RobotAvatar(new Point(1, 3), "Robot 2");
 		
 		Set<Robot> robots = new HashSet<>();
-		RoomController[] controllers = {new RoomController(-5,0,5,5), new RoomController(0,0,5,5), new RoomController(-5,-5,5,5), new RoomController(0,-5,5,5) };
+		LocationController[] controllers = {new LocationController(-5,0,5,5), new LocationController(0,0,5,5), new LocationController(-5,-5,5,5), new LocationController(0,-5,5,5) };
 		
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
 		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
@@ -84,7 +84,7 @@ public class Main {
 		GET.CentralStation().attachNewRobot(robot2);
 		GET.CentralStation().attachNewRobot(robot3);
 		GET.CentralStation().attachNewRobot(robot4);
-		
+
 		//plans need to be rewritten with new coordinates
 		Point2D.Double[] pl1 = {new Point2D.Double(3,-3), new Point2D.Double(-4,-3), new Point2D.Double(-7,-3)};
 		Point2D.Double[] pl2 = {new Point2D.Double(-2.5,-3), new Point2D.Double(-2.5,3), new Point2D.Double(-7,3)};
@@ -98,12 +98,12 @@ public class Main {
 		Strategy plan4 = new Strategy(pl4);
 		
 		
-		//GET.CentralStation().getRobot(0).beginMission(plan1);
+		GET.CentralStation().getRobot(0).beginMission(plan1);
 		System.out.println("runnong second robot");
 		GET.CentralStation().getRobot(1).beginMission(plan2);
 		System.out.println("running thrid robot");
 		GET.CentralStation().getRobot(2).beginMission(plan3);
-		System.out.println("running thrid robot");
+		System.out.println("running forth robot");
 		GET.CentralStation().getRobot(3).beginMission(plan4);
 		//robot2.setDestination(new Point(5,5));
 		
