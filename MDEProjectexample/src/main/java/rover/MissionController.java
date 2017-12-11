@@ -21,11 +21,15 @@ public class MissionController extends Thread {
 		this.strategy=strategy;
 		this.robot=robot;
 		LocationController cl;
-		if((cl=GET.CentralStation().environment.getLocationController(robot.getRobotPosition()))!=null) {
-			physicalLocationID=cl.getID();
-		}else {
-			physicalLocationID=-1;
+		physicalLocationID=-1;
+		logicalLocationID=-1;
+		if(isLogical(cl=GET.CentralStation().environment.getLocationControllerByTypeOrder(robot.getRobotPosition()))) {
+			logicalLocationID=cl.getID();
 		}
+		if(isPhysical(cl)){
+			physicalLocationID=cl.getID();
+		}
+		
 	}
 
 	//Robot running function 
@@ -134,12 +138,19 @@ public class MissionController extends Thread {
 		return false;
 	}
 	
-	private boolean checkBeforeEnter(Point2D.Double p) {
-		LocationController lc=GET.CentralStation().environment.getLocationController(p);
+	private boolean checkBeforeEnter(Point2D.Double p) {//needs tp be updated for logical areas
+		LocationController lc=GET.CentralStation().environment.getLocationControllerByTypeOrder(p);
+		
+		if(isLogical(lc) && logicalLocationID != lc.getID()) {
+			LocationController lc2=GET.CentralStation().environment.getLocationControllerByType(p,Environment.AreaType.PHYSICAL);
+			return lc.LocationIsAccessbile() && lc2.LocationIsAccessbile(); 
+		}
 		
 		if(isPhysical(lc) && physicalLocationID != lc.getID()) {
 			return lc.LocationIsAccessbile(); 
 		}
+		
+		
 		return true;
 	}
 	
