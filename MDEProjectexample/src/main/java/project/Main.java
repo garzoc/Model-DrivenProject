@@ -65,7 +65,11 @@ public class Main {
 //		RobotAvatar robot2 = new RobotAvatar(new Point(1, 3), "Robot 2");
 		
 		Set<Robot> robots = new HashSet<>();
-		LocationController[] controllers = {new LocationController(-5,0,5,5), new LocationController(0,0,5,5), new LocationController(-5,-5,5,5), new LocationController(0,-5,5,5) };
+		LocationController[] controllers = {
+				new LocationController(-5,0,5,5,Environment.AreaType.PHYSICAL,5), 
+				new LocationController(0,0,5,5,Environment.AreaType.PHYSICAL,5), 
+				new LocationController(-5,-5,5,5,Environment.AreaType.PHYSICAL,5), 
+				new LocationController(0,-5,5,5,Environment.AreaType.PHYSICAL,5) };
 		
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
 		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
@@ -104,7 +108,7 @@ public class Main {
 		System.out.println("running thrid robot");
 		GET.CentralStation().getRobot(2).beginMission(plan3);
 		System.out.println("running forth robot");
-		GET.CentralStation().getRobot(3).beginMission(plan4);
+		//GET.CentralStation().getRobot(3).beginMission(plan4);
 		//robot2.setDestination(new Point(5,5));
 		
 /*	

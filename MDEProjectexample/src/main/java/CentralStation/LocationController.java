@@ -2,18 +2,31 @@ package CentralStation;
 
 import java.awt.geom.Point2D;
 
+import CentralStation.Environment.AreaType;
+
 public class LocationController {
 	private Point2D.Double[] boundries;
 	private boolean stateLocked=false;
 	private int numberOfRobotsInside=0;
 	private int ID;
+	public final int REWARD_POINTS;
+	private AreaType areaType;
 	
 	
 	
-	public LocationController(double x,double y,double width,double height){
+	public LocationController(double x,double y,double width,double height,AreaType type,int rewardPoints){
 		Point2D.Double[] b= {new Point2D.Double(x,y),new Point2D.Double(width,height)};
 		this.boundries=b;
+		this.areaType=type;
+		REWARD_POINTS=rewardPoints;
+		
 	}
+	
+	public AreaType getAreaType() {
+		return this.areaType;
+	}
+	
+	
 	
 	protected void setID(int ID) {
 		this.ID=ID;

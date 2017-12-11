@@ -57,20 +57,39 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 	//Leave a old room and then enter a new room
 	@Override
-	public void onNewRoomEnter(int newRoomID,int oldRoomID) {
-		//System.out.println("hi a new room"+newRoomID+" vs "+oldRoomID);
+	public void onPhysicalRoomSwitched(int newRoomID,int oldRoomID) {
+		System.out.println("hi a new physical room"+newRoomID+" vs "+oldRoomID);
 		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea();
 		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea();
 	}
+	
+	@Override
+	public void onLogicalRoomSwitched(int newRoomID,int oldRoomID){
+		System.out.println("hi a new logical room"+newRoomID+" vs "+oldRoomID);
+	}
 	//Leave a room and then enter outside
 	@Override
-	public void onAreaLeave(int oldRoomID) {
+	public void onPhysicalAreaLeave(int oldRoomID) {
+		System.out.println("Bye physical "+oldRoomID);
 		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea();
 	}
+	
+	
 	//Enter a room from outside
 	@Override
-	public void onAreaEnter(int newRoomID) {
+	public void onPhysicalAreaEnter(int newRoomID) {
+		System.out.println("welcome physical "+newRoomID);
 		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea();	
+	}
+	
+	@Override
+	public void onLogicalAreaEnter(int newRoomID) {
+		System.out.println("welcome logic "+newRoomID);
+	}
+	
+	@Override
+	public void onLogicalAreaLeave(int oldRoomID) {
+		System.out.println("Bye logic"+oldRoomID);
 	}
 	//Tell the robot go to Point p
 	@Override

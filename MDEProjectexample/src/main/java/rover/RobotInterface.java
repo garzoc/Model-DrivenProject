@@ -18,8 +18,11 @@ public interface RobotInterface {
 	public void setDestination(Point2D.Double p);
 	public Point2D.Double getRobotPosition();
 	
-	public void onNewRoomEnter(int newRoomID,int oldRoomID);
-	public void onAreaLeave(int oldRoomID);
-	public void onAreaEnter(int newRoomID);
+	public void onPhysicalRoomSwitched(int newRoomID,int oldRoomID);
+	public void onLogicalRoomSwitched(int newRoomID,int oldRoomID);
+	public void onPhysicalAreaLeave(int oldRoomID);
+	public void onLogicalAreaLeave(int oldRoomID);
+	public void onPhysicalAreaEnter(int newRoomID);
+	public void onLogicalAreaEnter(int newRoomID);
 	public void onMissionComplete();
 }
