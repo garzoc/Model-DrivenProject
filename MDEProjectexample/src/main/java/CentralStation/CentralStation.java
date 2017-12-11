@@ -41,15 +41,7 @@ public class CentralStation {
 		}
 	}
 
-	
-	/*public Environment environment() {
-		return finder;
-	}*/
-	
-	/*public LocationController getLocationController(Point2D.Double p) {
-		return finder.getLocationController(p);
-	}*/
-	
+
 	public int getNumberOfRobots() {
 		return 0;
 	}

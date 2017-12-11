@@ -23,7 +23,7 @@ public class MissionController extends Thread {
 		LocationController cl;
 		physicalLocationID=-1;
 		logicalLocationID=-1;
-		if(isLogical(cl=GET.CentralStation().environment.getLocationControllerByTypeOrder(robot.getRobotPosition()))) {
+		if(isLogical(cl= GET.getLocationByOrder(robot.getRobotPosition()))) {
 			logicalLocationID=cl.getID();
 		}
 		if(isPhysical(cl)){
@@ -46,10 +46,10 @@ public class MissionController extends Thread {
 			tick=missionProgress;
 			robot.missionUpdate();
 			
-			lc=GET.CentralStation().environment.getLocationControllerByTypeOrder(robot.getRobotPosition());
+			lc=GET.getLocationByOrder(robot.getRobotPosition());
 			if(isLogical(lc)) {
 				onRoomEnter(lc);
-				lc=GET.CentralStation().environment.getLocationControllerByType(robot.getRobotPosition(),Environment.AreaType.PHYSICAL);
+				lc= GET.getLocationByType(robot.getRobotPosition(), Environment.AreaType.PHYSICAL);
 			}else {
 				if(logicalLocationID!=-1) robot.onLogicalAreaLeave(logicalLocationID);
 				logicalLocationID=-1;
@@ -109,7 +109,7 @@ public class MissionController extends Thread {
 	}
 	
 	private boolean isRoom(int roomID) {
-		if(GET.CentralStation().environment.getControllerByID(roomID)!=null) return true;
+		if(GET.getLocationByID(roomID)!=null) return true;
 		return false;
 	}
 	
@@ -141,10 +141,10 @@ public class MissionController extends Thread {
 	}
 	
 	private boolean checkBeforeEnter(Point2D.Double p) {//needs tp be updated for logical areas
-		LocationController lc=GET.CentralStation().environment.getLocationControllerByTypeOrder(p);
+		LocationController lc=GET.getLocationByOrder(p);
 		
 		if(isLogical(lc) && logicalLocationID != lc.getID()) {
-			LocationController lc2=GET.CentralStation().environment.getLocationControllerByType(p,Environment.AreaType.PHYSICAL);
+			LocationController lc2=GET.getLocationByType(p,Environment.AreaType.PHYSICAL);
 			return lc.LocationIsAccessbile() && lc2.LocationIsAccessbile(); 
 		}
 		

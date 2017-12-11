@@ -1,5 +1,6 @@
 package CentralStation;
 
+import java.awt.geom.Point2D;
 import java.util.LinkedList;
 
 import Interfaces.Interface;
@@ -19,9 +20,6 @@ public class GET {
 		
 	}
 	
-	/* public void set(Point p) {
-		p.setX(4);	
-	}*/
 	public static CentralStation CentralStation() {
 		//if(!stateLocked) {
 			return c;
@@ -48,6 +46,17 @@ public class GET {
 		}
 	}
 	
+	public static LocationController getLocationByOrder(Point2D.Double location) {
+		return GET.CentralStation().environment.getLocationControllerByTypeOrder(location);
+	}
+	
+	public static LocationController getLocationByType(Point2D.Double location, Environment.AreaType area) {
+		return GET.CentralStation().environment.getLocationControllerByType(location,area);
+	}
+	
+	public static LocationController getLocationByID(int roomID) {
+		return GET.CentralStation().environment.getControllerByID(roomID);
+	}
 	
 	
 	
