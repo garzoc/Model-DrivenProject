@@ -8,7 +8,6 @@ import CentralStation.GET;
 import project.AbstractRobotSimulator;
 import project.AbstractSimulatorMonitor;
 
-import project.RobotAvatar;
 import rover.Strategy;
 import simbad.sim.EnvironmentDescription;
 public class GUI extends AbstractSimulatorMonitor implements Interface{

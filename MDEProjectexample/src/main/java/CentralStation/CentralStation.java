@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import Interfaces.Interface;
-import project.RobotAvatar;
 import rover.MissionController;
 import rover.RobotInterface;
 import rover.Strategy;
