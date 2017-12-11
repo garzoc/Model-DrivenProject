@@ -61,8 +61,8 @@ public class CentralStation {
 		this.stationID=id;
 	}
 	
-	protected void setRewardPoint(int rewardPoint,int robotID) {
-		gui.onRewardPointRecieved(rewardPoint, robotID);
+	public void setRewardPoint(int rewardPoint,String robotID,Environment.AreaType pointSystem) {
+		gui.onRewardPointRecieved(rewardPoint, robotID, pointSystem);
 	}
 	
 	

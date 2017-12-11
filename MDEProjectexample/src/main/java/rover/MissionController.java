@@ -44,7 +44,8 @@ public class MissionController extends Thread {
 		boolean missionHasFinished=false; 
 		while(!missionHasFinished) {
 			tick=missionProgress;
-			//get the current location of the robot
+			robot.missionUpdate();
+			
 			lc=GET.CentralStation().environment.getLocationControllerByTypeOrder(robot.getRobotPosition());
 			if(isLogical(lc)) {
 				onRoomEnter(lc);
@@ -54,7 +55,8 @@ public class MissionController extends Thread {
 				logicalLocationID=-1;
 			}
 			onRoomEnter(lc);
-						
+			
+		
 			char val=(char) (missionPoints.length>missionProgress+1?1:0);
 			//check if the robot has reached the Point and if next room is locked 
 			if(robot.isAtPosition(missionPoints[missionProgress]) && checkBeforeEnter(missionPoints[val+missionProgress])){
@@ -152,6 +154,10 @@ public class MissionController extends Thread {
 		
 		
 		return true;
+	}
+	
+	public Strategy getStrategy() {
+		return this.strategy;
 	}
 	
 	

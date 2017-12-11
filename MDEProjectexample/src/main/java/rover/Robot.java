@@ -4,16 +4,22 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import project.AbstractRobotSimulator;
+import CentralStation.Environment;
 import CentralStation.GET;
 import CentralStation.LocationController;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
-	MissionController m;
+	private MissionController m;
+
+	private long time;
+	private boolean usePointSystemA;
 	
 	public Robot(Point2D.Double position, String name) {
 		super(convertCoord(position), name);
 		m=null;
+		time=System.currentTimeMillis();
+		usePointSystemA=true;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,13 +49,38 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		return cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius && cp.getY()-p.getY()<robotRadius &&  cp.getY()-p.getY()>-robotRadius;
 		
 		//System.out.println("cp is "+cp.getX()+" p is "+p.getX()+" difference X is " +(cp.getX()-p.getX())+" is "+ (cp.getX()-p.getX()>-robotRadius &&  cp.getX()-p.getX()<robotRadius));
-		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));
-		
-		
-		//return super.isAtPosition(new project.Point(p.getX(), p.getY()));
+		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));	
 	}
-
 	
+	public String getRobotID() {
+		return super.getName();
+	}
+	
+	private void getRewardPoints() {
+		LocationController lc;
+			
+		lc=GET.CentralStation().environment.getLocationControllerByType(this.getRobotPosition(),Environment.AreaType.PHYSICAL);
+		if(lc!=null) {
+			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,getRobotID(),Environment.AreaType.PHYSICAL);
+		}
+	
+		lc=GET.CentralStation().environment.getLocationControllerByType(this.getRobotPosition(),Environment.AreaType.LOGICAL);
+		if(lc!=null) {
+			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,getRobotID(),Environment.AreaType.LOGICAL);
+		}
+		
+	}
+		
+	
+
+	@Override
+	public void missionUpdate(){
+		if(System.currentTimeMillis()-time>1000) {
+			getRewardPoints();	
+			time=System.currentTimeMillis();
+		}
+		
+	}
 
 	@Override
 	public void onMissionComplete() {
@@ -110,6 +141,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		
 		return new Point2D.Double(-((double)Math.round(p.getZ()*1000)/1000),-((double)Math.round(p.getX()*1000))/1000);
 	}
+
+	
 
 	
 

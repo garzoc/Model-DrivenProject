@@ -3,7 +3,7 @@ import java.awt.Point;
 import rover.Robot;
 import java.util.Set;
 
-
+import CentralStation.Environment;
 import CentralStation.GET;
 import project.AbstractRobotSimulator;
 import project.AbstractSimulatorMonitor;
@@ -28,7 +28,7 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 	}
 
 
-	public void onRewardPointRecieved(int rewardPoints, int robotID) {
+	public void onRewardPointRecieved(int rewardPoints, String robotID,Environment.AreaType pointSystem) {
 		
 		
 	}
