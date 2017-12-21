@@ -5,51 +5,60 @@ import java.awt.geom.Point2D;
 
 import CentralStation.LocationController;
 import CentralStation.Environment;
+import CentralStation.Environment.AreaType;
 import CentralStation.GET;
 
 
 
-public class MissionController extends Thread {
+class MissionController extends Thread {
 
 	private final Strategy strategy;
 	private final RobotInterface robot;
 	private volatile int tick=0;
 	private int physicalLocationID;
 	private int logicalLocationID;
+	private boolean forcedTermination;
 	
 	MissionController(Strategy strategy,RobotInterface robot){
 		this.strategy=strategy;
 		this.robot=robot;
+		strategy.createPathByRoom();
+
+		
 		LocationController cl;
 		physicalLocationID=-1;
 		logicalLocationID=-1;
-		if(isLogical(cl= GET.getLocationByOrder(robot.getRobotPosition()))) {
+		if(isLogical(cl= GET.locationByOrder(robot.getRobotPosition()))) {
 			logicalLocationID=cl.getID();
+			physicalLocationID=GET.locationByType(robot.getRobotPosition(),AreaType.PHYSICAL).getID();
 		}
 		if(isPhysical(cl)){
 			physicalLocationID=cl.getID();
 		}
-		
+		forcedTermination=false;
+	
 	}
 
 	//Robot running function 
 	public void run() {
 		Point2D.Double[] missionPoints = strategy.getOriginalPoints();
 		int missionProgress = 0;
+		robot.onMissionBegin();
+		
 		robot.setDestination(missionPoints[missionProgress]);
 		LocationController lc;
 		
 		//boolean controllerExists=false;
 		//as long as the robot is DONE with the mission, keep looping
-		boolean missionHasFinished=false; 
-		while(!missionHasFinished) {
+		while(!forcedTermination) {
 			tick=missionProgress;
+			
 			robot.missionUpdate();
 			
-			lc=GET.getLocationByOrder(robot.getRobotPosition());
+			lc=GET.locationByOrder(robot.getRobotPosition());
 			if(isLogical(lc)) {
 				onRoomEnter(lc);
-				lc= GET.getLocationByType(robot.getRobotPosition(), Environment.AreaType.PHYSICAL);
+				lc= GET.locationByType(robot.getRobotPosition(), AreaType.PHYSICAL);
 			}else {
 				if(logicalLocationID!=-1) robot.onLogicalAreaLeave(logicalLocationID);
 				logicalLocationID=-1;
@@ -64,14 +73,24 @@ public class MissionController extends Thread {
 				if(missionProgress+1!=missionPoints.length) {
 					robot.setDestination(missionPoints[++missionProgress]);
 				}else {//otherwise break the loop 
-					missionHasFinished=true;
+					break;
 				}
 			}
+			robot.setDestination(missionPoints[missionProgress]);
     	   
 		}
-		robot.onMissionComplete();
+		if(!forcedTermination) {
+			robot.onMissionComplete();
+		}else {
+			robot.onMissionTerminated();
+		}
 	}
 	//
+	
+	protected void forceTerminat() {
+		this.forcedTermination=true;
+	}
+	
 	private void onRoomEnter(LocationController newRoom) {
 		//if the robot has entered a new area and if that area is a room
 		if(switchedLocation(newRoom)) {		
@@ -100,7 +119,6 @@ public class MissionController extends Thread {
 				logicalLocationID=-1;
 			}
 		}
-
 	}
 	
 	private boolean isRoom(LocationController lc) {
@@ -109,12 +127,12 @@ public class MissionController extends Thread {
 	}
 	
 	private boolean isRoom(int roomID) {
-		if(GET.getLocationByID(roomID)!=null) return true;
+		if(GET.locationByID(roomID)!=null) return true;
 		return false;
 	}
 	
 	private boolean isPhysical(LocationController room) {
-		if(isRoom(room) && room.getAreaType()==Environment.AreaType.PHYSICAL) {
+		if(isRoom(room) && room.getAreaType()==AreaType.PHYSICAL) {
 			return true;
 		}
 		return false;
@@ -122,7 +140,7 @@ public class MissionController extends Thread {
 	
 	private boolean isLogical(LocationController room) {
 		
-		if(isRoom(room) && room.getAreaType()==Environment.AreaType.LOGICAL) {
+		if(isRoom(room) && room.getAreaType()==AreaType.LOGICAL) {
 			return true;
 		}
 		return false;
@@ -141,15 +159,15 @@ public class MissionController extends Thread {
 	}
 	
 	private boolean checkBeforeEnter(Point2D.Double p) {//needs tp be updated for logical areas
-		LocationController lc=GET.getLocationByOrder(p);
+		LocationController lc=GET.locationByOrder(p);
 		
 		if(isLogical(lc) && logicalLocationID != lc.getID()) {
-			LocationController lc2=GET.getLocationByType(p,Environment.AreaType.PHYSICAL);
-			return lc.LocationIsAccessbile() && lc2.LocationIsAccessbile(); 
+			LocationController lc2=GET.locationByType(p,AreaType.PHYSICAL);
+			return lc.LocationIsAccessbile(robot) && lc2.LocationIsAccessbile(robot); 
 		}
 		
 		if(isPhysical(lc) && physicalLocationID != lc.getID()) {
-			return lc.LocationIsAccessbile(); 
+			return lc.LocationIsAccessbile(robot); 
 		}
 		
 		

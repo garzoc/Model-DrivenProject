@@ -4,14 +4,14 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import Interfaces.Interface;
-import rover.MissionController;
+
 import rover.RobotInterface;
 import rover.Strategy;
 
 public class CentralStation {
 	private RobotInterface[] robots;
 	private int numberOfAttachedRobots=0;
-	private Interface gui;
+	public Interface gui;
 	private int stationID;
 	public final Environment environment;
 	
@@ -35,7 +35,8 @@ public class CentralStation {
 	
 	public void attachNewRobot(RobotInterface robot) {
 		if(robots.length!=numberOfAttachedRobots) {
-			
+	
+			robot.setID(numberOfAttachedRobots);
 			robots[numberOfAttachedRobots++]=robot;
 		}
 	}
@@ -52,8 +53,8 @@ public class CentralStation {
 		this.stationID=id;
 	}
 	
-	public void setRewardPoint(int rewardPoint,String robotID,Environment.AreaType pointSystem) {
-		gui.onRewardPointRecieved(rewardPoint, robotID, pointSystem);
+	public void setRewardPoint(int rewardPoint,RobotInterface robot,Environment.AreaType pointSystem) {
+		gui.onRewardPointRecieved(rewardPoint, robot, pointSystem);
 	}
 	
 	

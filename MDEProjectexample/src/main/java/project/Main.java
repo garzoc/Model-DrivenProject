@@ -6,9 +6,11 @@ import java.util.Set;
 
 import CentralStation.CentralStation;
 import CentralStation.Environment;
+import CentralStation.Environment.AreaType;
 import CentralStation.LocationController;
 import CentralStation.GET;
 import Interfaces.GUI;
+import Interfaces.InputManager;
 import project.AbstractSimulatorMonitor;
 import java.awt.Point;
 import java.awt.geom.Point2D;
@@ -66,11 +68,11 @@ public class Main {
 		
 		Set<Robot> robots = new HashSet<>();
 		LocationController[] controllers = {
-				new LocationController(-5,0,5,5,Environment.AreaType.PHYSICAL,5), 
-				new LocationController(0,0,5,5,Environment.AreaType.PHYSICAL,5), 
-				new LocationController(-5,-5,5,5,Environment.AreaType.PHYSICAL,5), 
-				new LocationController(0,-5,5,5,Environment.AreaType.PHYSICAL,5),
-				new LocationController(0,-5,3,3,Environment.AreaType.LOGICAL,5)};
+				new LocationController(-5,0,5,5,AreaType.PHYSICAL,5), 
+				new LocationController(0,0,5,5,AreaType.PHYSICAL,5), 
+				new LocationController(-5,-5,5,5,AreaType.PHYSICAL,5), 
+				new LocationController(0,-5,5,5,AreaType.PHYSICAL,5),
+				new LocationController(0,-5,3,3,AreaType.LOGICAL,5)};
 		
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
 		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
@@ -109,8 +111,12 @@ public class Main {
 		System.out.println("running thrid robot");
 		GET.CentralStation().getRobot(2).beginMission(plan3);
 		System.out.println("running forth robot");
+		
 		//GET.CentralStation().getRobot(3).beginMission(plan4);
 		//robot2.setDestination(new Point(5,5));
+		//((Runnable)GET.CentralStation().gui).run();
+		InputManager i=new InputManager();
+		i.run();
 		
 /*	
 		CentralStation k=Singleton.getCentralStation();

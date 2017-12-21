@@ -3,10 +3,11 @@ package CentralStation;
 import java.awt.geom.Point2D;
 
 import CentralStation.Environment.AreaType;
+import rover.RobotInterface;
 
 public class LocationController {
 	private Point2D.Double[] boundries;
-	private boolean stateLocked=false;
+	private RobotInterface owner;
 	private int numberOfRobotsInside=0;
 	private int ID;
 	public final int REWARD_POINTS;
@@ -36,23 +37,31 @@ public class LocationController {
 		return ID;
 	}
 	
-	public void LockArea() {
-		stateLocked = true;
+	public void LockArea(RobotInterface robot) {
+		if(this.LocationIsAccessbile(robot)) {
+			this.owner = robot;
+		}
 	}
-	public void UnlockArea() {
-		stateLocked = false;
+	public void UnlockArea(RobotInterface robot) {
+		if(this.LocationIsAccessbile(robot)) {
+			this.owner = null;
+		}
 	}
 	
-	public boolean LocationIsAccessbile() {
-		return !stateLocked;
+	public boolean isLocked() {
+		return this.owner!=null;
 	}
 	
-	public void robotOnEnter() {
+	public boolean LocationIsAccessbile(RobotInterface robot) {
+		return this.owner==null || this.owner.getID()==robot.getID();	
+	}
+	
+	/*public void robotOnEnter() {
 		numberOfRobotsInside ++;
 	}
 	public void robotOnLeave() {
 		numberOfRobotsInside --;
-	}
+	}*/
 	
 	protected double getX() {
 		return boundries[0].getX();
