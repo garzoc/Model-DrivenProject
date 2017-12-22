@@ -115,9 +115,9 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	//Leave a old room and then enter a new room
 	@Override
 	public void onPhysicalRoomSwitched(int newRoomID,int oldRoomID) {
-		System.out.println("hi a new physical room"+newRoomID+" vs "+oldRoomID);
-		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
-		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);
+		//ystem.out.println("hi a new physical room"+newRoomID+" vs "+oldRoomID);
+		//GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
+		//GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);
 	}
 	
 	@Override
