@@ -12,14 +12,16 @@ public class LocationController {
 	private int ID;
 	public final int REWARD_POINTS;
 	private AreaType areaType;
+	private String locationName;
 	
 	
 	
-	public LocationController(double x,double y,double width,double height,AreaType type,int rewardPoints){
+	public LocationController(double x,double y,double width,double height,AreaType type,String name,int rewardPoints){
 		Point2D.Double[] b= {new Point2D.Double(x,y),new Point2D.Double(width,height)};
 		this.boundries=b;
 		this.areaType=type;
 		REWARD_POINTS=rewardPoints;
+		this.locationName=name;
 		
 	}
 	
@@ -27,7 +29,13 @@ public class LocationController {
 		return this.areaType;
 	}
 	
+	public String getLocationName() {
+		return this.locationName;
+	}
 	
+	protected void setLocationName(String locationName) {
+		this.locationName=locationName;
+	}
 	
 	protected void setID(int ID) {
 		this.ID=ID;

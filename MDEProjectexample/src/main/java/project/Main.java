@@ -68,11 +68,11 @@ public class Main {
 		
 		Set<Robot> robots = new HashSet<>();
 		LocationController[] controllers = {
-				new LocationController(-5,0,5,5,AreaType.PHYSICAL,5), 
-				new LocationController(0,0,5,5,AreaType.PHYSICAL,5), 
-				new LocationController(-5,-5,5,5,AreaType.PHYSICAL,5), 
-				new LocationController(0,-5,5,5,AreaType.PHYSICAL,5),
-				new LocationController(0,-5,3,3,AreaType.LOGICAL,5)};
+				new LocationController(-5,0,5,5,AreaType.PHYSICAL,"Room1",5), 
+				new LocationController(0,0,5,5,AreaType.PHYSICAL,"Room2",5), 
+				new LocationController(-5,-5,5,5,AreaType.PHYSICAL,"Room3",5), 
+				new LocationController(0,-5,5,5,AreaType.PHYSICAL,"Room4",5),
+				new LocationController(0,-5,3,3,AreaType.LOGICAL,"Room5",5)};
 		
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
 		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
