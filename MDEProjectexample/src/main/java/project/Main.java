@@ -61,12 +61,10 @@ public class Main {
 		
 		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);
 
-//		Set<RobotAvatar> robots = new HashSet<>();
 
-//		RobotAvatar robot1 = new RobotAvatar(new Point(0, 0), "Robot 1");
-//		RobotAvatar robot2 = new RobotAvatar(new Point(1, 3), "Robot 2");
-		
+		//List of robots
 		Set<Robot> robots = new HashSet<>();
+		//Assign the property for each room to a LocationController  
 		LocationController[] controllers = {
 				new LocationController(-5,0,5,5,AreaType.PHYSICAL,"Room1",5), 
 				new LocationController(0,0,5,5,AreaType.PHYSICAL,"Room2",5), 
@@ -74,6 +72,7 @@ public class Main {
 				new LocationController(0,-5,5,5,AreaType.PHYSICAL,"Room4",5),
 				new LocationController(0,-5,3,3,AreaType.LOGICAL,"Room5",5)};
 		
+		//Initialize robots with position and name
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
 		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
 		Robot robot3 = new Robot(new Point2D.Double(-7, 3), "Robot 3");
@@ -84,7 +83,7 @@ public class Main {
 		robots.add(robot3);
 		robots.add(robot4);
 
-		
+		//create a new instance of centralstation that could be access BY GET(singleton class)
 		new GET(new GUI(robots, e), new Environment(controllers));
 		
 		GET.CentralStation().attachNewRobot(robot1);
@@ -98,7 +97,7 @@ public class Main {
 		Point2D.Double[] pl3 = {new Point2D.Double(-3,3), new Point2D.Double(3,3), new Point2D.Double(7,3)};
 		Point2D.Double[] pl4 = {new Point2D.Double(2.5,3), new Point2D.Double(2.5,-3), new Point2D.Double(7,-3)};
 		
-
+		//all the strategies 
 		Strategy plan1 = new Strategy(pl1);
 		Strategy plan2 = new Strategy(pl2);
 		Strategy plan3 = new Strategy(pl3);

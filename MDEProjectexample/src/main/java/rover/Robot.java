@@ -79,7 +79,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	
 	
 
-	
+	//terminate the current mission and replaced it with new mission
 	@Override
 	public void overwriteMission(Strategy str){
 			this.termiateMission();
@@ -91,7 +91,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
 
 	
-
+	
 	@Override
 	public void missionUpdate(){
 		if(System.currentTimeMillis()-time>1000) {
@@ -113,7 +113,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
 
 	
-	
+	//Entering a room from another room
 	public void onRoomSwitched(int newRoomID,int oldRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
 			//LOCK handles concurrency and make sure that robots do not lock the room at the same time
@@ -125,15 +125,17 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			
 		}
 	}
+	//Enter the area(rooms) from outside
 	public void onAreaEnter(int newRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
 			GET.Lock();
-				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
+				GET.locationByID(newRoomID).LockArea(this);	
 			GET.Unlock();
 		}else{
 			
 		}
 	}
+	//leave the room and go outside 
 	public void onAreaLeave(int oldRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
 			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);	
@@ -154,7 +156,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		super.setDestination(convertCoord(p));
 		
 	}
-	
+	//convert back to the normal coordinate system
 	private static project.Point convertCoord(Point2D.Double p){
 		return new project.Point(-p.getY(),-p.getX());
 	}

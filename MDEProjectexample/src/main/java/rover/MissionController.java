@@ -61,16 +61,9 @@ class MissionController extends Thread {
 				lc= GET.locationByType(robot.getRobotPosition(), AreaType.PHYSICAL);
 			}
 			onRoomEnter(lc);
-			
-			/*else {
-				if(logicalLocationID!=-1) robot.onAreaLeave(logicalLocationID,AreaType.LOGICAL);
-				logicalLocationID=-1;
-			}*/
-			
-			
 		
-			//char val=(char) (missionPoints.length>missionProgress+1?1:0);
-			//check if the robot has reached the Point and if next room is locked 
+			//check if the robot has reached the Point and if next room is locked
+			//check if the room  of point that going to be reached is unlcoked
 			if(checkBeforeEnter(missionPoints[missionProgress])) {
 				if(robot.isAtPosition(missionPoints[missionProgress])){
 					//If mission is not finished continue the mission
@@ -98,6 +91,7 @@ class MissionController extends Thread {
 		this.forcedTermination=true;
 	}
 	
+	//check if the robot enter anew room, if so update the relevant info for robot 
 	private void onRoomEnter(LocationController newRoom) {//change name if this method as it is unclear what it does otherwise
 		//if the robot has entered a new area and if that area is a room
 		if(switchedLocation(newRoom)) {		
@@ -137,7 +131,7 @@ class MissionController extends Thread {
 		if(GET.locationByID(roomID)!=null) return true;
 		return false;
 	}
-	
+	//check if the room is physical area
 	private boolean isPhysical(LocationController room) {
 		if(isRoom(room) && room.getAreaType()==AreaType.PHYSICAL) {
 			return true;
@@ -178,17 +172,17 @@ class MissionController extends Thread {
 		double hypotenuse=1.5;
 		double deltaX=Math.cos(angle)*hypotenuse;
 		
-		double deltaY=Math.pow(hypotenuse, 2)-Math.pow(deltaX, 2);
+		double deltaY=Math.sqrt(Math.pow(hypotenuse, 2)-Math.pow(deltaX, 2));
 		
 		deltaX=currentPos.getX()<target.getX()?Math.abs(deltaX):-deltaX;
 		deltaY=currentPos.getY()<target.getY()?Math.abs(deltaY):-deltaY;
-		
+		//the testing point in front of the robot 
 		Point2D.Double p=new Point2D.Double(currentPos.getX()+deltaX, currentPos.getY()+deltaY);
 		//System.out.println("delta Position X "+deltaX+" Y "+deltaY +"  Position X "+currentPos.getX()+" Y "+target.getX()+" and verify "+(currentPos.getX()<target.getX()));
 		//System.out.println("delta Position X "+deltaX+" Y "+deltaY);
 		//System.out.println("old Position X "+currentPos.getX()+" Y "+currentPos.getY());
 		//System.out.println("new Position X "+(currentPos.getX()+deltaX)+" Y "+(currentPos.getY()+deltaY));
-		
+		//check if the test point is in a new room
 		LocationController test=GET.locationByType(p,AreaType.PHYSICAL);
 		if(isRoom(test)&&switchedLocation(test)) {
 			System.out.println("about to enter a new room "+test.getLocationName());

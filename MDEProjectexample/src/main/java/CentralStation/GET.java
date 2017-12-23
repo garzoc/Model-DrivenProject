@@ -46,15 +46,15 @@ public class GET {
 		}
 		stateLocked=false;
 	}
-	
+	//get the the locationController 
 	public static LocationController locationByOrder(Point2D.Double location) {
 		return GET.CentralStation().environment.getLocationControllerByTypeOrder(location);
 	}
-	
+	//get the location by specified type of area (either logical or physical) 
 	public static LocationController locationByType(Point2D.Double location, AreaType area) {
 		return GET.CentralStation().environment.getLocationControllerByType(location,area);
 	}
-	
+	//get the LocationController by specified id
 	public static LocationController locationByID(int roomID) {
 		return GET.CentralStation().environment.getControllerByID(roomID);
 	}
