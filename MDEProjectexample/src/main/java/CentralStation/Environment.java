@@ -10,6 +10,11 @@ public class Environment {
 	    PHYSICAL,
 	}
 	
+	public enum PointSystem{
+		A,
+		B
+	}
+	
 	private LocationController[] rooms;
 	int numberOfAttachedControllers = 0;
 	public Environment(int maxNumberOfController){

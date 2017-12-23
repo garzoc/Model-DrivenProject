@@ -10,6 +10,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import CentralStation.Environment;
+import CentralStation.Environment.PointSystem;
 import CentralStation.GET;
 import project.AbstractRobotSimulator;
 import project.AbstractSimulatorMonitor;
@@ -33,7 +34,7 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 	}
 
 
-	public void onRewardPointRecieved(int rewardPoints, RobotInterface robot,Environment.AreaType pointSystem) {
+	public void onRewardPointRecieved(int rewardPoints, RobotInterface robot,PointSystem pointSystem) {
 		
 		
 	}

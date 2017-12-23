@@ -7,6 +7,8 @@ import project.AbstractRobotSimulator;
 import CentralStation.Environment;
 import CentralStation.GET;
 import CentralStation.LocationController;
+import CentralStation.Environment.AreaType;
+import CentralStation.Environment.PointSystem;
 
 public class Robot extends AbstractRobotSimulator implements RobotInterface {
 
@@ -65,12 +67,12 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			
 		lc=GET.CentralStation().environment.getLocationControllerByType(this.getRobotPosition(),Environment.AreaType.PHYSICAL);
 		if(lc!=null) {
-			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,this,Environment.AreaType.PHYSICAL);
+			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,this,PointSystem.A);
 		}
 	
 		lc=GET.CentralStation().environment.getLocationControllerByType(this.getRobotPosition(),Environment.AreaType.LOGICAL);
 		if(lc!=null) {
-			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,this,Environment.AreaType.LOGICAL);
+			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,this,PointSystem.B);
 		}
 		
 	}
@@ -108,56 +110,42 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		//GET.Unlock();;
 	}
 
+
+
+	
+	
+	public void onRoomSwitched(int newRoomID,int oldRoomID,AreaType areaType) {
+		if(areaType==AreaType.PHYSICAL) {
+			//LOCK handles concurrency and make sure that robots do not lock the room at the same time
+			GET.Lock();
+				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
+				GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
+			GET.Unlock();
+		}else{
+			
+		}
+	}
+	public void onAreaEnter(int newRoomID,AreaType areaType) {
+		if(areaType==AreaType.PHYSICAL) {
+			GET.Lock();
+				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
+			GET.Unlock();
+		}else{
+			
+		}
+	}
+	public void onAreaLeave(int oldRoomID,AreaType areaType) {
+		if(areaType==AreaType.PHYSICAL) {
+			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);	
+		}else{
+			
+		}
+	}
+	
 	@Override
 	public void onMissionComplete() {
 		System.out.println("mission completed");
 	}
-	//Leave a old room and then enter a new room
-	@Override
-	public void onPhysicalRoomSwitched(int newRoomID,int oldRoomID) {
-		//ystem.out.println("hi a new physical room"+newRoomID+" vs "+oldRoomID);
-		//GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
-		//GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);
-	}
-	
-	@Override
-	public void onLogicalRoomSwitched(int newRoomID,int oldRoomID){
-		//System.out.println("hi a new logical room"+newRoomID+" vs "+oldRoomID);
-	}
-	//Leave a room and then enter outside
-	@Override
-	public void onPhysicalAreaLeave(int oldRoomID) {
-		System.out.println("Bye physical "+oldRoomID);
-		GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
-	}
-	
-	
-	//Enter a room from outside
-	@Override
-	public void onPhysicalAreaEnter(int newRoomID) {
-		//System.out.println("welcome physical "+newRoomID);
-		GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
-	}
-	
-	@Override
-	public void onLogicalAreaEnter(int newRoomID) {
-		System.out.println("welcome logic "+newRoomID);
-		//this.termiateMission();
-		
-		/*this.setDestination(this.getPosition());
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-	}
-	
-	@Override
-	public void onLogicalAreaLeave(int oldRoomID) {
-		System.out.println("Bye logic"+oldRoomID);
-	}
-	
 	
 	
 	//Tell the robot go to Point p

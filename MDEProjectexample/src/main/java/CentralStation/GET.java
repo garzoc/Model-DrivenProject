@@ -28,7 +28,7 @@ public class GET {
 		//return null;
 	}
 	
-	public static void Lock() {
+	synchronized public static void Lock() {
 		//System.out.println(stateLocked);
 		if(stateLocked) {
 			Lock l=new Lock();
@@ -39,12 +39,12 @@ public class GET {
 	}
 	
 	
-	public static void Unlock() {
-		stateLocked=false;
+	public static void Unlock() {	
 		Lock lock;
 		if(null!=(lock=locks.poll())){
 			lock.unlock();
 		}
+		stateLocked=false;
 	}
 	
 	public static LocationController locationByOrder(Point2D.Double location) {

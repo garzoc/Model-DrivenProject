@@ -59,24 +59,31 @@ class MissionController extends Thread {
 			if(isLogical(lc)) {
 				onRoomEnter(lc);
 				lc= GET.locationByType(robot.getRobotPosition(), AreaType.PHYSICAL);
-			}else {
-				if(logicalLocationID!=-1) robot.onLogicalAreaLeave(logicalLocationID);
-				logicalLocationID=-1;
 			}
 			onRoomEnter(lc);
 			
+			/*else {
+				if(logicalLocationID!=-1) robot.onAreaLeave(logicalLocationID,AreaType.LOGICAL);
+				logicalLocationID=-1;
+			}*/
+			
+			
 		
-			char val=(char) (missionPoints.length>missionProgress+1?1:0);
+			//char val=(char) (missionPoints.length>missionProgress+1?1:0);
 			//check if the robot has reached the Point and if next room is locked 
-			if(robot.isAtPosition(missionPoints[missionProgress]) && checkBeforeEnter(missionPoints[val+missionProgress])){
-				//If mission is not finished continue the mission
-				if(missionProgress+1!=missionPoints.length) {
-					robot.setDestination(missionPoints[++missionProgress]);
-				}else {//otherwise break the loop 
-					break;
+			if(checkBeforeEnter(missionPoints[missionProgress])) {
+				if(robot.isAtPosition(missionPoints[missionProgress])){
+					//If mission is not finished continue the mission
+					if(missionProgress+1!=missionPoints.length) {
+						robot.setDestination(missionPoints[++missionProgress]);
+					}else {//otherwise break the loop 
+						break;
+					}
 				}
+				robot.setDestination(missionPoints[missionProgress]);
+			}else {
+				robot.pause(1);
 			}
-			robot.setDestination(missionPoints[missionProgress]);
     	   
 		}
 		if(!forcedTermination) {
@@ -91,30 +98,30 @@ class MissionController extends Thread {
 		this.forcedTermination=true;
 	}
 	
-	private void onRoomEnter(LocationController newRoom) {
+	private void onRoomEnter(LocationController newRoom) {//change name if this method as it is unclear what it does otherwise
 		//if the robot has entered a new area and if that area is a room
 		if(switchedLocation(newRoom)) {		
 				//if its a new room, UNlock the old room and Lock the new room		
 			if(isPhysical(newRoom)) {
 				if(isRoom(physicalLocationID)) {
-					robot.onPhysicalRoomSwitched(newRoom.getID(),physicalLocationID);	
+					robot.onRoomSwitched(newRoom.getID(),physicalLocationID,AreaType.PHYSICAL);	
 				}else {
 						//otherwise, robot is entering the new room from outside
 						//lock the new room 
-					robot.onPhysicalAreaEnter(newRoom.getID());
+					robot.onAreaEnter(newRoom.getID(),AreaType.PHYSICAL);
 				}//update the locationID to the current  room 
 				physicalLocationID=newRoom.getID();
 				
 			}else if(isLogical(newRoom)){
 				if(isRoom(logicalLocationID)) {
-					robot.onLogicalRoomSwitched(newRoom.getID(),logicalLocationID);	
+					robot.onRoomSwitched(newRoom.getID(),logicalLocationID,AreaType.LOGICAL);	
 				}else {
-					robot.onLogicalAreaEnter(newRoom.getID());
+					robot.onAreaEnter(newRoom.getID(),AreaType.LOGICAL);
 				}//update the locationID to the current  room 
 				logicalLocationID=newRoom.getID();
 			}else {
-				if(physicalLocationID!=-1) robot.onPhysicalAreaLeave(physicalLocationID);
-				if(logicalLocationID!=-1) robot.onLogicalAreaLeave(logicalLocationID);
+				if(physicalLocationID!=-1) robot.onAreaLeave(physicalLocationID,AreaType.PHYSICAL);
+				if(logicalLocationID!=-1) robot.onAreaLeave(logicalLocationID,AreaType.LOGICAL);
 				physicalLocationID=-1;
 				logicalLocationID=-1;
 			}
@@ -158,17 +165,49 @@ class MissionController extends Thread {
 		return false;
 	}
 	
-	private boolean checkBeforeEnter(Point2D.Double p) {//needs tp be updated for logical areas
-		LocationController lc=GET.locationByOrder(p);
+	private boolean checkBeforeEnter(Point2D.Double target) {//change thos method as it is not safe
+		LocationController lc=GET.locationByOrder(target);
+		
+		//uncommented code checks if the robot is close to entering a new area
+		Point2D.Double currentPos=robot.getRobotPosition();
+		//Y=kx+m;
+		//calculate the coefficient of the linear equation
+		double k=target.getY()==currentPos.getY()?0:(target.getY()-currentPos.getY())/(target.getX()-currentPos.getX());
+		//System.out.println(k);
+		double angle= Math.toDegrees(Math.atan(k));
+		double hypotenuse=1.5;
+		double deltaX=Math.cos(angle)*hypotenuse;
+		
+		double deltaY=Math.pow(hypotenuse, 2)-Math.pow(deltaX, 2);
+		
+		deltaX=currentPos.getX()<target.getX()?Math.abs(deltaX):-deltaX;
+		deltaY=currentPos.getY()<target.getY()?Math.abs(deltaY):-deltaY;
+		
+		Point2D.Double p=new Point2D.Double(currentPos.getX()+deltaX, currentPos.getY()+deltaY);
+		//System.out.println("delta Position X "+deltaX+" Y "+deltaY +"  Position X "+currentPos.getX()+" Y "+target.getX()+" and verify "+(currentPos.getX()<target.getX()));
+		//System.out.println("delta Position X "+deltaX+" Y "+deltaY);
+		//System.out.println("old Position X "+currentPos.getX()+" Y "+currentPos.getY());
+		//System.out.println("new Position X "+(currentPos.getX()+deltaX)+" Y "+(currentPos.getY()+deltaY));
+		
+		LocationController test=GET.locationByType(p,AreaType.PHYSICAL);
+		if(isRoom(test)&&switchedLocation(test)) {
+			System.out.println("about to enter a new room "+test.getLocationName());
+		}
+		//double m=currentPos.getY()-currentPos.getX()*k;
+		
+		
+		
 		
 		if(isLogical(lc) && logicalLocationID != lc.getID()) {
-			LocationController lc2=GET.locationByType(p,AreaType.PHYSICAL);
+			LocationController lc2=GET.locationByType(target,AreaType.PHYSICAL);
 			return lc.LocationIsAccessbile(robot) && lc2.LocationIsAccessbile(robot); 
 		}
 		
 		if(isPhysical(lc) && physicalLocationID != lc.getID()) {
 			return lc.LocationIsAccessbile(robot); 
 		}
+		
+		
 		
 		
 		return true;

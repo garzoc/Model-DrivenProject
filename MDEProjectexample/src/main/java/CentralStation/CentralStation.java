@@ -3,6 +3,7 @@ package CentralStation;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
+import CentralStation.Environment.PointSystem;
 import Interfaces.Interface;
 
 import rover.RobotInterface;
@@ -53,7 +54,7 @@ public class CentralStation {
 		this.stationID=id;
 	}
 	
-	public void setRewardPoint(int rewardPoint,RobotInterface robot,Environment.AreaType pointSystem) {
+	public void setRewardPoint(int rewardPoint,RobotInterface robot,PointSystem pointSystem) {
 		gui.onRewardPointRecieved(rewardPoint, robot, pointSystem);
 	}
 	
