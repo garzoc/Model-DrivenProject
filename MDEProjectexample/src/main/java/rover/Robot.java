@@ -117,30 +117,43 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void onRoomSwitched(int newRoomID,int oldRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
 			//LOCK handles concurrency and make sure that robots do not lock the room at the same time
-			GET.Lock();
+			//System.out.println("switch Physical "+GET.locationByID(newRoomID).getLocationName());
+			GET.Lock(this);
 				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
 				GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
 			GET.Unlock();
-		}else{
 			
+		}else{
+			GET.Lock(this);
+				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
+				GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
+			GET.Unlock();
+	
 		}
 	}
 	//Enter the area(rooms) from outside
 	public void onAreaEnter(int newRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
-			GET.Lock();
+			GET.Lock(this);
 				GET.locationByID(newRoomID).LockArea(this);	
 			GET.Unlock();
-		}else{
 			
+		}else{
+			//System.out.println("Hi Logic "+GET.locationByID(newRoomID).getLocationName());
+			GET.Lock(this);
+				GET.locationByID(newRoomID).LockArea(this);	
+			GET.Unlock();
 		}
 	}
 	//leave the room and go outside 
 	public void onAreaLeave(int oldRoomID,AreaType areaType) {
+		
 		if(areaType==AreaType.PHYSICAL) {
-			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);	
+			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
+			//System.out.println("bye physical "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName());
 		}else{
-			
+			//System.out.println("Bye Logic "+GET.locationByID(oldRoomID).getLocationName());
+			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
 		}
 	}
 	

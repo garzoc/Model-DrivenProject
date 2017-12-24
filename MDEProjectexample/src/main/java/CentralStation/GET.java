@@ -5,7 +5,8 @@ import java.util.LinkedList;
 
 import CentralStation.Environment.AreaType;
 import Interfaces.Interface;
-import project.Point;;
+import project.Point;
+import rover.RobotInterface;;
 
 public class GET {
 	
@@ -28,18 +29,32 @@ public class GET {
 		//return null;
 	}
 	
-	synchronized public static void Lock() {
-		//System.out.println(stateLocked);
+	private synchronized static Lock tryAcquireLock(RobotInterface robot) {
 		if(stateLocked) {
-			Lock l=new Lock();
+			Lock l=new Lock(robot);
 			locks.add(l);
-			l.lock();	
+			return l;
 		}
 		stateLocked=true;
+		return null;
+	}
+	
+	public static void Lock(RobotInterface robot) {
+		//System.out.println(stateLocked);
+		boolean hasBeenProcessed=false;
+		while(!hasBeenProcessed) {
+			Lock l;
+			if((l=tryAcquireLock(robot))!=null) 
+				l.lock();
+			else 
+				hasBeenProcessed=true;	
+		}
+		
+		
 	}
 	
 	
-	public static void Unlock() {	
+	public synchronized static void Unlock() {	
 		Lock lock;
 		if(null!=(lock=locks.poll())){
 			lock.unlock();

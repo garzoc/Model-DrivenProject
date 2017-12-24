@@ -65,12 +65,19 @@ public class Main {
 		//List of robots
 		Set<Robot> robots = new HashSet<>();
 		//Assign the property for each room to a LocationController  
-		LocationController[] controllers = {
+		/*LocationController[] controllers = {
 				new LocationController(-5,0,5,5,AreaType.PHYSICAL,"Room1",5), 
 				new LocationController(0,0,5,5,AreaType.PHYSICAL,"Room2",5), 
 				new LocationController(-5,-5,5,5,AreaType.PHYSICAL,"Room3",5), 
 				new LocationController(0,-5,5,5,AreaType.PHYSICAL,"Room4",5),
-				new LocationController(0,-5,3,3,AreaType.LOGICAL,"Room5",5)};
+				new LocationController(0,-5,3,3,AreaType.LOGICAL,"Room5",5)};*/
+		
+		LocationController[] controllers = {
+				new LocationController(-5,0,5,5,AreaType.LOGICAL,"Room1",5), 
+				new LocationController(0,0,5,5,AreaType.LOGICAL,"Room2",5), 
+				new LocationController(-5,-5,5,5,AreaType.LOGICAL,"Room3",5), 
+				new LocationController(0,-5,5,5,AreaType.LOGICAL,"Room4",5),
+				new LocationController(0,-5,3,3,AreaType.PHYSICAL,"Room5",5)};
 		
 		//Initialize robots with position and name
 		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");

@@ -7,7 +7,7 @@ import rover.RobotInterface;
 
 public class LocationController {
 	private Point2D.Double[] boundries;
-	private RobotInterface owner;
+	private volatile RobotInterface owner;
 	private int numberOfRobotsInside=0;
 	private int ID;
 	public final int REWARD_POINTS;

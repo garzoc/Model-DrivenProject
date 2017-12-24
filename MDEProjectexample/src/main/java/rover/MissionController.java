@@ -11,12 +11,12 @@ import CentralStation.GET;
 
 
 class MissionController extends Thread {
-
+	final static int NO_AREA=-1;
 	private final Strategy strategy;
 	private final RobotInterface robot;
 	private volatile int tick=0;
-	private int physicalLocationID;
-	private int logicalLocationID;
+
+	private int[] layerdRoomIDTracker;//test
 	private boolean forcedTermination;
 	
 	MissionController(Strategy strategy,RobotInterface robot){
@@ -25,17 +25,19 @@ class MissionController extends Thread {
 		strategy.createPathByRoom();
 
 		
-		LocationController cl;
-		physicalLocationID=-1;
-		logicalLocationID=-1;
-		if(isLogical(cl= GET.locationByOrder(robot.getRobotPosition()))) {
-			logicalLocationID=cl.getID();
-			physicalLocationID=GET.locationByType(robot.getRobotPosition(),AreaType.PHYSICAL).getID();
-		}
-		if(isPhysical(cl)){
-			physicalLocationID=cl.getID();
-		}
+		LocationController lc;
+	
 		forcedTermination=false;
+		
+		//test code block code
+		layerdRoomIDTracker=new int[AreaType.values().length];
+		for(int i=0;i<layerdRoomIDTracker.length;i++) {
+			if((lc=GET.locationByType(robot.getRobotPosition(),AreaType.values()[i]))!=null) {
+				layerdRoomIDTracker[i]=lc.getID();
+			}else {
+				layerdRoomIDTracker[i]=NO_AREA;
+			}
+		}
 	
 	}
 
@@ -51,16 +53,14 @@ class MissionController extends Thread {
 		//boolean controllerExists=false;
 		//as long as the robot is DONE with the mission, keep looping
 		while(!forcedTermination) {
+			
 			tick=missionProgress;
 			
 			robot.missionUpdate();
-			
 			lc=GET.locationByOrder(robot.getRobotPosition());
-			if(isLogical(lc)) {
-				onRoomEnter(lc);
-				lc= GET.locationByType(robot.getRobotPosition(), AreaType.PHYSICAL);
-			}
-			onRoomEnter(lc);
+			testForRoom(lc);
+			
+			
 		
 			//check if the robot has reached the Point and if next room is locked
 			//check if the room  of point that going to be reached is unlcoked
@@ -91,36 +91,55 @@ class MissionController extends Thread {
 		this.forcedTermination=true;
 	}
 	
-	//check if the robot enter anew room, if so update the relevant info for robot 
-	private void onRoomEnter(LocationController newRoom) {//change name if this method as it is unclear what it does otherwise
-		//if the robot has entered a new area and if that area is a room
-		if(switchedLocation(newRoom)) {		
-				//if its a new room, UNlock the old room and Lock the new room		
-			if(isPhysical(newRoom)) {
-				if(isRoom(physicalLocationID)) {
-					robot.onRoomSwitched(newRoom.getID(),physicalLocationID,AreaType.PHYSICAL);	
+
+	private int getLayerPriority(AreaType areaType) {
+		
+		return areaType.ordinal();
+	}
+	
+	private int getOldRoomID(AreaType areaType) {
+		
+		return layerdRoomIDTracker[getLayerPriority(areaType)];
+	}
+	
+private void setRoomOldID(AreaType areaType,int ID) {
+		
+		 layerdRoomIDTracker[areaType.ordinal()]=ID;
+	}
+	
+	private void testForRoom(LocationController lc) {//change name if this method as it is unclear what it does otherwise
+		
+		int highestLayerFound;
+		if(isRoom(lc))
+			highestLayerFound=getLayerPriority(lc.getAreaType());
+		else
+			highestLayerFound=NO_AREA;
+		
+		for(int i=0;i<=highestLayerFound;i++) {
+			lc=GET.locationByType(robot.getRobotPosition(),AreaType.values()[i]);
+			if(isRoom(lc) && switchedLocation(lc.getID(),lc.getAreaType())) {
+				if(isRoom(lc)) {
+					if(isRoom(GET.locationByID(getOldRoomID(lc.getAreaType())))){
+						robot.onRoomSwitched(lc.getID(), getOldRoomID(lc.getAreaType()),lc.getAreaType());
+					}else{
+						robot.onAreaEnter(lc.getID(), lc.getAreaType());
+					}
+					setRoomOldID(lc.getAreaType(),lc.getID());
 				}else {
-						//otherwise, robot is entering the new room from outside
-						//lock the new room 
-					robot.onAreaEnter(newRoom.getID(),AreaType.PHYSICAL);
-				}//update the locationID to the current  room 
-				physicalLocationID=newRoom.getID();
-				
-			}else if(isLogical(newRoom)){
-				if(isRoom(logicalLocationID)) {
-					robot.onRoomSwitched(newRoom.getID(),logicalLocationID,AreaType.LOGICAL);	
-				}else {
-					robot.onAreaEnter(newRoom.getID(),AreaType.LOGICAL);
-				}//update the locationID to the current  room 
-				logicalLocationID=newRoom.getID();
-			}else {
-				if(physicalLocationID!=-1) robot.onAreaLeave(physicalLocationID,AreaType.PHYSICAL);
-				if(logicalLocationID!=-1) robot.onAreaLeave(logicalLocationID,AreaType.LOGICAL);
-				physicalLocationID=-1;
-				logicalLocationID=-1;
+					robot.onAreaLeave(getOldRoomID(lc.getAreaType()), lc.getAreaType());
+					setRoomOldID(lc.getAreaType(),NO_AREA);
+				}
+			}
+		}
+		
+		for(int i=highestLayerFound+1;i<AreaType.values().length;i++) {
+			if(switchedLocation(NO_AREA,AreaType.values()[i])) {
+				robot.onAreaLeave(getOldRoomID(AreaType.values()[i]),AreaType.values()[i]);
+				setRoomOldID(AreaType.values()[i],NO_AREA);
 			}
 		}
 	}
+	
 	
 	private boolean isRoom(LocationController lc) {
 		if(lc!=null) return true;
@@ -132,48 +151,48 @@ class MissionController extends Thread {
 		return false;
 	}
 	//check if the room is physical area
-	private boolean isPhysical(LocationController room) {
-		if(isRoom(room) && room.getAreaType()==AreaType.PHYSICAL) {
+	
+	
+	private boolean switchedLocation(int newRoomID,AreaType areaType) {
+		boolean ifISROOM=(isRoom(newRoomID)  && GET.locationByID(newRoomID).getID()!=layerdRoomIDTracker[getLayerPriority(areaType)]);
+		boolean ifIsNotRoom= (!isRoom(newRoomID) && layerdRoomIDTracker[getLayerPriority(areaType)]!=NO_AREA);
+		
+		if( ifISROOM||ifIsNotRoom) {
 			return true;
 		}
+	
 		return false;
 	}
 	
-	private boolean isLogical(LocationController room) {
+	/*private boolean switchedLocation(int newRoomID,AreaType) {
+		boolean ifISROOM=(isRoom(newRoomID) && newRoomID!=layerdRoomIDTracker[GET.locationByID(newRoomID).getAreaType().ordinal()]);
+		boolean ifIsNotRoom= (!isRoom(newRoomID) && layerdRoomIDTracker[GET.locationByID(newRoomID).getAreaType().ordinal()]!=NO_AREA);
 		
-		if(isRoom(room) && room.getAreaType()==AreaType.LOGICAL) {
+		if( ifISROOM||ifIsNotRoom) {
 			return true;
 		}
-		return false;
-	}
 	
-	private boolean switchedLocation(LocationController room) {
-		
-		if((isRoom(room)  && isPhysical(room) && room.getID()!=physicalLocationID) || (!isRoom(room) && physicalLocationID!=-1)) {
-			return true;
-		}
-		if((isRoom(room)  && isLogical(room) && room.getID()!=logicalLocationID) || (!isRoom(room) && logicalLocationID!=-1)) {
-			return true;
-		}
-		
 		return false;
-	}
+	}*/
+	
 	
 	private boolean checkBeforeEnter(Point2D.Double target) {//change thos method as it is not safe
-		LocationController lc=GET.locationByOrder(target);
+		//LocationController lc=GET.locationByOrder(target);
 		
-		//uncommented code checks if the robot is close to entering a new area
+		/*//uncommented code checks if the robot is close to entering a new area
 		Point2D.Double currentPos=robot.getRobotPosition();
 		//Y=kx+m;
 		//calculate the coefficient of the linear equation
 		double k=target.getY()==currentPos.getY()?0:(target.getY()-currentPos.getY())/(target.getX()-currentPos.getX());
-		//System.out.println(k);
+		//calcuate the coefficient value in degrees
 		double angle= Math.toDegrees(Math.atan(k));
+		//set the distance from which the robot should detect a new room
 		double hypotenuse=1.5;
+		//calculate the difference in x values
 		double deltaX=Math.cos(angle)*hypotenuse;
-		
+		//calculate the difference in x values
 		double deltaY=Math.sqrt(Math.pow(hypotenuse, 2)-Math.pow(deltaX, 2));
-		
+		//Set the correct orientation in  
 		deltaX=currentPos.getX()<target.getX()?Math.abs(deltaX):-deltaX;
 		deltaY=currentPos.getY()<target.getY()?Math.abs(deltaY):-deltaY;
 		//the testing point in front of the robot 
@@ -186,25 +205,23 @@ class MissionController extends Thread {
 		LocationController test=GET.locationByType(p,AreaType.PHYSICAL);
 		if(isRoom(test)&&switchedLocation(test)) {
 			System.out.println("about to enter a new room "+test.getLocationName());
-		}
+		}*/
 		//double m=currentPos.getY()-currentPos.getX()*k;
 		
 		
+		LocationController lc=GET.locationByOrder(target);
 		
-		
-		if(isLogical(lc) && logicalLocationID != lc.getID()) {
-			LocationController lc2=GET.locationByType(target,AreaType.PHYSICAL);
-			return lc.LocationIsAccessbile(robot) && lc2.LocationIsAccessbile(robot); 
+		if(isRoom(lc)) {
+			int topLayer=getLayerPriority(lc.getAreaType());
+			for(int i=0;i<=topLayer;i++) {
+				lc=GET.locationByType(target,AreaType.values()[i]);
+				if(isRoom(lc) && !lc.LocationIsAccessbile(robot)) {
+					return false;
+				}
+			}
 		}
-		
-		if(isPhysical(lc) && physicalLocationID != lc.getID()) {
-			return lc.LocationIsAccessbile(robot); 
-		}
-		
-		
-		
-		
 		return true;
+
 	}
 	
 	public Strategy getStrategy() {

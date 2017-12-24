@@ -6,8 +6,8 @@ import java.awt.geom.Point2D;
 public class Environment {
 	
 	public enum AreaType {
-	    LOGICAL,
-	    PHYSICAL,
+		PHYSICAL,
+		LOGICAL
 	}
 	
 	public enum PointSystem{
@@ -67,6 +67,26 @@ public class Environment {
 		return lc;
 	 
 	}
+	
+	/*public LocationController getLocationControllerByTypeOrder(Point2D.Double p) {//made 
+		LocationController lc=null;
+		int hierarchy=-1;
+		for (int i=0;i<rooms.length;i++) {
+			boolean w=p.getX() >rooms[i].getX() && p.getX() <rooms[i].getX()+ rooms[i].getWidth();
+			boolean h=p.getY() >rooms[i].getY() && p.getY() <rooms[i].getY()+ rooms[i].getHeight();
+			if(w && h) {
+				if(rooms[i].getAreaType().ordinal()>hierarchy) {
+					lc= rooms[i];
+					hierarchy=rooms[i].getAreaType().ordinal();
+				}
+				if(AreaType.values().length-1==hierarchy) {
+					System.out.println("bananaRama");
+					break;
+				};
+			}
+		}
+		return lc;
+	}*/
 	
 	
 	public LocationController getControllerByID(int ID) {
