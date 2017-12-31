@@ -16,7 +16,7 @@ class MissionController extends Thread {
 	private final RobotInterface robot;
 	private volatile int tick=0;
 
-	private int[] layerdRoomIDTracker;//test
+	private int[] oldRoomIDTracker;//test
 	private boolean forcedTermination;
 	
 	MissionController(Strategy strategy,RobotInterface robot){
@@ -30,12 +30,12 @@ class MissionController extends Thread {
 		forcedTermination=false;
 		
 		//test code block code
-		layerdRoomIDTracker=new int[AreaType.values().length];
-		for(int i=0;i<layerdRoomIDTracker.length;i++) {
+		oldRoomIDTracker=new int[AreaType.values().length];
+		for(int i=0;i<oldRoomIDTracker.length;i++) {
 			if((lc=GET.locationByType(robot.getRobotPosition(),AreaType.values()[i]))!=null) {
-				layerdRoomIDTracker[i]=lc.getID();
+				oldRoomIDTracker[i]=lc.getID();
 			}else {
-				layerdRoomIDTracker[i]=NO_AREA;
+				oldRoomIDTracker[i]=NO_AREA;
 			}
 		}
 	
@@ -47,7 +47,6 @@ class MissionController extends Thread {
 		int missionProgress = 0;
 		robot.onMissionBegin();
 		
-		robot.setDestination(missionPoints[missionProgress]);
 		LocationController lc;
 		
 		//boolean controllerExists=false;
@@ -99,12 +98,12 @@ class MissionController extends Thread {
 	
 	private int getOldRoomID(AreaType areaType) {
 		
-		return layerdRoomIDTracker[getLayerPriority(areaType)];
+		return oldRoomIDTracker[getLayerPriority(areaType)];
 	}
 	
 private void setRoomOldID(AreaType areaType,int ID) {
 		
-		 layerdRoomIDTracker[areaType.ordinal()]=ID;
+		 oldRoomIDTracker[areaType.ordinal()]=ID;
 	}
 	
 	private void testForRoom(LocationController lc) {//change name if this method as it is unclear what it does otherwise
@@ -115,29 +114,31 @@ private void setRoomOldID(AreaType areaType,int ID) {
 		else
 			highestLayerFound=NO_AREA;
 		
+		
 		for(int i=0;i<=highestLayerFound;i++) {
 			lc=GET.locationByType(robot.getRobotPosition(),AreaType.values()[i]);
-			if(isRoom(lc) && switchedLocation(lc.getID(),lc.getAreaType())) {
-				if(isRoom(lc)) {
+			if(isRoom(lc)) {
+				if(switchedLocation(lc.getID(),lc.getAreaType())) {
 					if(isRoom(GET.locationByID(getOldRoomID(lc.getAreaType())))){
 						robot.onRoomSwitched(lc.getID(), getOldRoomID(lc.getAreaType()),lc.getAreaType());
 					}else{
 						robot.onAreaEnter(lc.getID(), lc.getAreaType());
 					}
 					setRoomOldID(lc.getAreaType(),lc.getID());
-				}else {
-					robot.onAreaLeave(getOldRoomID(lc.getAreaType()), lc.getAreaType());
-					setRoomOldID(lc.getAreaType(),NO_AREA);
 				}
-			}
-		}
-		
-		for(int i=highestLayerFound+1;i<AreaType.values().length;i++) {
-			if(switchedLocation(NO_AREA,AreaType.values()[i])) {
+				
+			}else if(switchedLocation(NO_AREA,AreaType.values()[i])) {
 				robot.onAreaLeave(getOldRoomID(AreaType.values()[i]),AreaType.values()[i]);
 				setRoomOldID(AreaType.values()[i],NO_AREA);
 			}
 		}
+		
+		/*for(int i=highestLayerFound+1;i<AreaType.values().length;i++) {
+			if(switchedLocation(NO_AREA,AreaType.values()[i])) {
+				robot.onAreaLeave(getOldRoomID(AreaType.values()[i]),AreaType.values()[i]);
+				setRoomOldID(AreaType.values()[i],NO_AREA);
+			}
+		}*/
 	}
 	
 	
@@ -154,8 +155,8 @@ private void setRoomOldID(AreaType areaType,int ID) {
 	
 	
 	private boolean switchedLocation(int newRoomID,AreaType areaType) {
-		boolean ifISROOM=(isRoom(newRoomID)  && GET.locationByID(newRoomID).getID()!=layerdRoomIDTracker[getLayerPriority(areaType)]);
-		boolean ifIsNotRoom= (!isRoom(newRoomID) && layerdRoomIDTracker[getLayerPriority(areaType)]!=NO_AREA);
+		boolean ifISROOM=(isRoom(newRoomID)  && GET.locationByID(newRoomID).getID()!=oldRoomIDTracker[getLayerPriority(areaType)]);
+		boolean ifIsNotRoom= (!isRoom(newRoomID) && oldRoomIDTracker[getLayerPriority(areaType)]!=NO_AREA);
 		
 		if( ifISROOM||ifIsNotRoom) {
 			return true;
