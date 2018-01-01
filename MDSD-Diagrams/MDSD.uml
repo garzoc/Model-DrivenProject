@@ -30,6 +30,7 @@
       <packagedElement xmi:type="uml:Interface" xmi:id="_Tdjh8MraEee3GpEcRVl1hQ" name="Admin"/>
       <packagedElement xmi:type="uml:Interface" xmi:id="_rtpQQM-REeeEp_p0C69awQ" name="Interface2"/>
       <packagedElement xmi:type="uml:Model" xmi:id="_bqIuYM-nEeeEp_p0C69awQ" name="Model1"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_Lji2AO77Eee5JtreKSs-1w" name="Interface3"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_ntCREMVKEeehKYDeKmhtYQ" name="Service">
       <packagedElement xmi:type="uml:Component" xmi:id="_im3zEMVLEeehKYDeKmhtYQ" name="Location Handler"/>
@@ -48,6 +49,7 @@
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_xJkSIMhZEeeNPMpegbQtCQ" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_T4VMsMhZEeeNPMpegbQtCQ" contract="_T4VMsMhZEeeNPMpegbQtCQ"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_TjjRkM7SEee0gNgj05s1-A" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_67w4EMriEee3GpEcRVl1hQ" contract="_67w4EMriEee3GpEcRVl1hQ"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_ZOtqUM7iEee0gNgj05s1-A" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_OKJwsM7iEee0gNgj05s1-A" contract="_OKJwsM7iEee0gNgj05s1-A"/>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_PphUQO74Eee5JtreKSs-1w" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_L66UgO74Eee5JtreKSs-1w" contract="_L66UgO74Eee5JtreKSs-1w"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_Bb204MhaEeeNPMpegbQtCQ" name="getRewards"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_Bb4DAMhaEeeNPMpegbQtCQ" name="getLocation"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_Bb4qEMhaEeeNPMpegbQtCQ" name="Operation1"/>
@@ -66,14 +68,17 @@
         <packagedElement xmi:type="uml:Usage" xmi:id="_FbUvYM-SEeeEp_p0C69awQ" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_-P9U4M-REeeEp_p0C69awQ"/>
         <packagedElement xmi:type="uml:Dependency" xmi:id="_ZTywUO4rEeeLRNQBX5auZg" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_lMJ90MVMEeehKYDeKmhtYQ"/>
         <packagedElement xmi:type="uml:Usage" xmi:id="_bdlHUO4rEeeLRNQBX5auZg" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_CjeqAO1WEeeFLuVQ25UzPw"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_9gb9EO75Eee5JtreKSs-1w" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_1uayQO75Eee5JtreKSs-1w"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_aVqxEO78Eee5JtreKSs-1w" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_Kf05wO78Eee5JtreKSs-1w"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_vdS1oO79Eee5JtreKSs-1w" client="_DEPyoMfkEeelj-Zx7TYBMg" supplier="_L66UgO74Eee5JtreKSs-1w"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_OcSo8MfkEeelj-Zx7TYBMg" name="Rover Location"/>
       <packagedElement xmi:type="uml:Interface" xmi:id="_OwA2MMfkEeelj-Zx7TYBMg" name="Reward Points" visibility="public"/>
-      <packagedElement xmi:type="uml:Interface" xmi:id="_feskkMflEeelj-Zx7TYBMg" name="SensorData">
+      <packagedElement xmi:type="uml:Interface" xmi:id="_feskkMflEeelj-Zx7TYBMg" name="SensorInterface">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_YnNOsMftEeelj-Zx7TYBMg" name="getGPSData"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_xmyRsMftEeelj-Zx7TYBMg" name="getProximityData"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Interface" xmi:id="_h7D5UMflEeelj-Zx7TYBMg" name="CameraFeed">
+      <packagedElement xmi:type="uml:Interface" xmi:id="_h7D5UMflEeelj-Zx7TYBMg" name="CameraInterface">
         <ownedOperation xmi:type="uml:Operation" xmi:id="_K4-usMfuEeelj-Zx7TYBMg" name="getCamerafeed"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_oSf8gMflEeelj-Zx7TYBMg" name="Camera">
@@ -84,13 +89,6 @@
       <packagedElement xmi:type="uml:Component" xmi:id="_SRlYIMfnEeelj-Zx7TYBMg" name="Component1"/>
       <packagedElement xmi:type="uml:Component" xmi:id="_WK9dcMfnEeelj-Zx7TYBMg" name="Component2"/>
       <packagedElement xmi:type="uml:Component" xmi:id="_ZUYFcMfnEeelj-Zx7TYBMg" name="Component3"/>
-      <packagedElement xmi:type="uml:Component" xmi:id="_4itwwMfnEeelj-Zx7TYBMg" name="Sensors">
-        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_78GucMfnEeelj-Zx7TYBMg" client="_4itwwMfnEeelj-Zx7TYBMg" supplier="_feskkMflEeelj-Zx7TYBMg" contract="_feskkMflEeelj-Zx7TYBMg"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_YnYN0MftEeelj-Zx7TYBMg" name="Operation1"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_a7zHgMftEeelj-Zx7TYBMg" name="getS"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_webigMftEeelj-Zx7TYBMg" name="getGPSData"/>
-        <ownedOperation xmi:type="uml:Operation" xmi:id="_1G8lwMftEeelj-Zx7TYBMg" name="getProximityData"/>
-      </packagedElement>
       <packagedElement xmi:type="uml:Usage" xmi:id="_c3h7wMfqEeelj-Zx7TYBMg" client="_lMJ90MVMEeehKYDeKmhtYQ" supplier="_lMJ90MVMEeehKYDeKmhtYQ"/>
       <packagedElement xmi:type="uml:Usage" xmi:id="_fE7ncMfqEeelj-Zx7TYBMg" client="_4itwwMfnEeelj-Zx7TYBMg" supplier="_feskkMflEeelj-Zx7TYBMg"/>
       <packagedElement xmi:type="uml:Interface" xmi:id="_y8TtAMhXEeeNPMpegbQtCQ" name="Central Station">
@@ -107,18 +105,33 @@
         <ownedAttribute xmi:type="uml:Port" xmi:id="_h9HzoM7cEee0gNgj05s1-A" name="Port1" aggregation="composite"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_L2nxIM-NEeeEp_p0C69awQ" name="Implement"/>
-      <packagedElement xmi:type="uml:Component" xmi:id="_hplKUM-REeeEp_p0C69awQ" name="Central Station">
+      <packagedElement xmi:type="uml:Component" xmi:id="_hplKUM-REeeEp_p0C69awQ" name="CentralStation">
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_GE4CsM-SEeeEp_p0C69awQ" client="_hplKUM-REeeEp_p0C69awQ" supplier="_-P9U4M-REeeEp_p0C69awQ" contract="_-P9U4M-REeeEp_p0C69awQ"/>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_z3RGkO79Eee5JtreKSs-1w" client="_hplKUM-REeeEp_p0C69awQ" supplier="_L66UgO74Eee5JtreKSs-1w" contract="_L66UgO74Eee5JtreKSs-1w"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_QfU64O74Eee5JtreKSs-1w" client="_hplKUM-REeeEp_p0C69awQ" supplier="_L66UgO74Eee5JtreKSs-1w"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_HlbaoO77Eee5JtreKSs-1w" client="_hplKUM-REeeEp_p0C69awQ" supplier="_FdFqkO76Eee5JtreKSs-1w"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Interface" xmi:id="_-P9U4M-REeeEp_p0C69awQ"/>
       <packagedElement xmi:type="uml:Component" xmi:id="_USEq0M7aEee0gNgj05s1-A" name="MissionController">
         <ownedAttribute xmi:type="uml:Port" xmi:id="_gyZs8M7cEee0gNgj05s1-A" name="Port1" aggregation="composite"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_mdBdcM-MEeeEp_p0C69awQ" client="_USEq0M7aEee0gNgj05s1-A" supplier="_OKJwsM7iEee0gNgj05s1-A" contract="_OKJwsM7iEee0gNgj05s1-A"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_iqidQO4rEeeLRNQBX5auZg" client="_USEq0M7aEee0gNgj05s1-A" supplier="_CjeqAO1WEeeFLuVQ25UzPw" contract="_CjeqAO1WEeeFLuVQ25UzPw"/>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_5PYXkO75Eee5JtreKSs-1w" client="_USEq0M7aEee0gNgj05s1-A" supplier="_1uayQO75Eee5JtreKSs-1w" contract="_1uayQO75Eee5JtreKSs-1w"/>
         <packagedElement xmi:type="uml:Dependency" xmi:id="_dVh9cM7cEee0gNgj05s1-A" client="_USEq0M7aEee0gNgj05s1-A" supplier="_TjcYUM7cEee0gNgj05s1-A"/>
         <packagedElement xmi:type="uml:Usage" xmi:id="_XDl2kM7iEee0gNgj05s1-A" client="_USEq0M7aEee0gNgj05s1-A" supplier="_OKJwsM7iEee0gNgj05s1-A"/>
         <packagedElement xmi:type="uml:Usage" xmi:id="_FC5IMO1VEeeFLuVQ25UzPw" client="_USEq0M7aEee0gNgj05s1-A" supplier="_DywWAO1VEeeFLuVQ25UzPw"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_4itwwMfnEeelj-Zx7TYBMg" name="Sensors">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_78GucMfnEeelj-Zx7TYBMg" client="_4itwwMfnEeelj-Zx7TYBMg" supplier="_feskkMflEeelj-Zx7TYBMg" contract="_feskkMflEeelj-Zx7TYBMg"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_YnYN0MftEeelj-Zx7TYBMg" name="Operation1"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_a7zHgMftEeelj-Zx7TYBMg" name="getS"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_webigMftEeelj-Zx7TYBMg" name="getGPSData"/>
+        <ownedOperation xmi:type="uml:Operation" xmi:id="_1G8lwMftEeelj-Zx7TYBMg" name="getProximityData"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_L66UgO74Eee5JtreKSs-1w" name="CSInterface"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_1uayQO75Eee5JtreKSs-1w" name="MissionInterface"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_FdFqkO76Eee5JtreKSs-1w" name="EnviroInterface"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_Kf05wO78Eee5JtreKSs-1w" name="MissionInterface"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_pi7JwMVMEeehKYDeKmhtYQ" name="Model">
       <packagedElement xmi:type="uml:Component" xmi:id="_pi7JwcVMEeehKYDeKmhtYQ" name="GUI"/>
@@ -134,10 +147,15 @@
         <ownedOperation xmi:type="uml:Operation" xmi:id="_BbfBcMhaEeeNPMpegbQtCQ" name="provideAccess"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Component" xmi:id="_MgcPsMk2EeemI42dTDyh2g" name="Rover"/>
-      <packagedElement xmi:type="uml:Component" xmi:id="_ZAwngM7aEee0gNgj05s1-A" name="LocationController">
+      <packagedElement xmi:type="uml:Component" xmi:id="_ZAwngM7aEee0gNgj05s1-A" name="Environment">
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_oltoQM-MEeeEp_p0C69awQ" client="_ZAwngM7aEee0gNgj05s1-A" supplier="_yjQr8M-LEeeEp_p0C69awQ" contract="_yjQr8M-LEeeEp_p0C69awQ"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_oc42YO4rEeeLRNQBX5auZg" client="_ZAwngM7aEee0gNgj05s1-A" supplier="_CjeqAO1WEeeFLuVQ25UzPw" contract="_CjeqAO1WEeeFLuVQ25UzPw"/>
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_HBws4O77Eee5JtreKSs-1w" client="_ZAwngM7aEee0gNgj05s1-A" supplier="_FdFqkO76Eee5JtreKSs-1w" contract="_FdFqkO76Eee5JtreKSs-1w"/>
         <packagedElement xmi:type="uml:Usage" xmi:id="_j2YMkM7iEee0gNgj05s1-A" client="_ZAwngM7aEee0gNgj05s1-A" supplier="_OKJwsM7iEee0gNgj05s1-A"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_DZtLoO78Eee5JtreKSs-1w" name="Component1"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_gvzi8O78Eee5JtreKSs-1w" name="Area">
+          <packagedElement xmi:type="uml:Component" xmi:id="_rWCh0O78Eee5JtreKSs-1w" name="RewardPoints"/>
+        </packagedElement>
       </packagedElement>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_cGy5cM7cEee0gNgj05s1-A" client="_pi7JwMVMEeehKYDeKmhtYQ" supplier="_pi7JwMVMEeehKYDeKmhtYQ"/>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_lSWqEM7cEee0gNgj05s1-A" name="notify" client="_gyZs8M7cEee0gNgj05s1-A" supplier="_h9HzoM7cEee0gNgj05s1-A"/>
@@ -151,6 +169,10 @@
         <ownedAttribute xmi:type="uml:Port" xmi:id="_DywWAO1VEeeFLuVQ25UzPw" name="Port2" aggregation="composite"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_NdFYoM-NEeeEp_p0C69awQ" client="_ISUj8M-NEeeEp_p0C69awQ" supplier="_L2nxIM-NEeeEp_p0C69awQ" contract="_L2nxIM-NEeeEp_p0C69awQ"/>
         <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_paqGMO4rEeeLRNQBX5auZg" client="_ISUj8M-NEeeEp_p0C69awQ" supplier="_CjeqAO1WEeeFLuVQ25UzPw" contract="_CjeqAO1WEeeFLuVQ25UzPw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Component" xmi:id="_bSR_wO77Eee5JtreKSs-1w" name="Missions">
+        <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="_ZXyzkO78Eee5JtreKSs-1w" client="_bSR_wO77Eee5JtreKSs-1w" supplier="_Kf05wO78Eee5JtreKSs-1w" contract="_Kf05wO78Eee5JtreKSs-1w"/>
+        <packagedElement xmi:type="uml:Component" xmi:id="_ckCikO77Eee5JtreKSs-1w" name="Strategies"/>
       </packagedElement>
     </packagedElement>
   </packagedElement>
