@@ -94,7 +94,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	
 	@Override
 	public void missionUpdate(){
-		if(System.currentTimeMillis()-time>1000) {
+		if(System.currentTimeMillis()-time>5000) {
 			getRewardPoints();	
 			time=System.currentTimeMillis();
 			LocationController lc=GET.locationByOrder(getRobotPosition());
