@@ -62,7 +62,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		//System.out.println("cp is "+cp.getY()+" p is "+p.getY()+" difference y is " +(cp.getY()-p.getY())+" is "+ (cp.getY()-p.getY()>-robotRadius &&  cp.getY()-p.getY()<robotRadius));	
 	}
 	
-	private void getRewardPoints() {
+	/*private void getRewardPoints() {
 		LocationController lc;
 			
 		lc=GET.CentralStation().environment.getLocationControllerByType(this.getRobotPosition(),Environment.AreaType.PHYSICAL);
@@ -75,7 +75,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			GET.CentralStation().setRewardPoint(lc.REWARD_POINTS,this,PointSystem.B);
 		}
 		
-	}
+	}*/
 	
 	
 
@@ -94,8 +94,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	
 	@Override
 	public void missionUpdate(){
-		if(System.currentTimeMillis()-time>5000) {
-			getRewardPoints();	
+		if(System.currentTimeMillis()-time>2000) {
+			//getRewardPoints();	
 			time=System.currentTimeMillis();
 			LocationController lc=GET.locationByOrder(getRobotPosition());
 			if(lc!=null) {

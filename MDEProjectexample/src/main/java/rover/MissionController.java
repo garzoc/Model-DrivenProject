@@ -56,8 +56,6 @@ class MissionController extends Thread {
 			lc=GET.locationByOrder(robot.getRobotPosition());
 			testForRoom(lc);
 			
-			
-		
 			//check if the robot has reached the Point and if next room is locked
 			//check if the room  of point that going to be reached is unlcoked
 			if(checkBeforeEnter(missionPoints[missionProgress])) {
