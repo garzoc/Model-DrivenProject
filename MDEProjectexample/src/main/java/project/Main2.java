@@ -33,8 +33,8 @@ public class Main2 {
 		
 		Color c = Color.GRAY;
 		Color red = Color.RED;
-		
-		Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5.0f, e, red);
+										//  y pos   a  ->  b     color
+		Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5f, e, c);
 
 		Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, c);
 
@@ -42,25 +42,29 @@ public class Main2 {
 
 		Boundary w4 = new VerticalBoundary(-5.0f, -2.0f, 2.0f, e, c);
 
-		AbstractWall roomWall1 = new HorizontalWall(-0f, 2f, -2f, e, c);
+		AbstractWall roomWall1 = new HorizontalWall(0f, 2f, -2f, e, c);
 
-		AbstractWall roomWall2 = new HorizontalWall(-0f, 5f, 3.5f, e, c);
-		
+		AbstractWall roomWall2 = new HorizontalWall(0f, 5f, 3.5f, e, c);
+		//
 		AbstractWall roomWall3 = new HorizontalWall(0f, -5f, -3.5f, e, c);
+		//Consulting room 
+		AbstractWall roomWall = new HorizontalWall(-2f, 2f, 0f, e, red);
+		AbstractWall roomWall4 = new HorizontalWall(-2f, 5f, 3.5f, e, red);
+		
+		AbstractWall roomWall5 = new VerticalWall(0f, -2f, 2f, e, c);
 
-		AbstractWall roomWall4 = new VerticalWall(0f, -2f, 2f, e, c);
-
-		AbstractWall roomWall5 = new VerticalWall(5f, -5f, -3.5f, e, c);
+		AbstractWall roomWall6 = new VerticalWall(5f, -5f, -3.5f, e, c);
 		
-		AbstractWall roomWall6 = new VerticalWall(5f, 5f, 3.5f, e, c);
+		AbstractWall roomWall7 = new VerticalWall(5f, 5f, 3.5f, e, c);
 		
-		AbstractWall roomWall7 = new VerticalWall(-5f, 5f, 3.5f, e, c);
+		AbstractWall roomWall8 = new VerticalWall(-5f, 5f, 3.5f, e, c);
 		
-		AbstractWall roomWall8 = new VerticalWall(-5f, -5f, -3.5f, e, c);
+		AbstractWall roomWall9 = new VerticalWall(-5f, -5f, -3.5f, e, c);
 		
-		AbstractWall roomWall9 = new VerticalWall(0f, -5f, -3.5f, e, c);
+		AbstractWall roomWall10 = new VerticalWall(0f, -5f, -3.5f, e, c);
 		
-		AbstractWall roomWall10 = new VerticalWall(0f, 5f, 3.5f, e, c);
+		AbstractWall roomWall11 = new VerticalWall(0f, 5f, 3.5f, e, c);
+		
 		
 		
 		Set <Robot> robots = new HashSet<>();
