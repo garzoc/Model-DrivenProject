@@ -2,6 +2,7 @@ package CentralStation;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
+import java.util.LinkedList;
 
 import CentralStation.Environment.PointSystem;
 import Interfaces.Interface;
@@ -44,7 +45,7 @@ public class CentralStation {
 
 
 	public int getNumberOfRobots() {
-		return 0;
+		return numberOfAttachedRobots;
 	}
 	public int getID() {
 		return this.stationID;
@@ -55,6 +56,7 @@ public class CentralStation {
 	}
 	
 	public void setRewardPoint(int rewardPoint,RobotInterface robot,PointSystem pointSystem) {
+		
 		gui.onRewardPointRecieved(rewardPoint, robot, pointSystem);
 	}
 	

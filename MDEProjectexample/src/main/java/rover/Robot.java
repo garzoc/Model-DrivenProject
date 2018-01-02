@@ -97,6 +97,17 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		if(System.currentTimeMillis()-time>1000) {
 			getRewardPoints();	
 			time=System.currentTimeMillis();
+			LocationController lc=GET.locationByOrder(getRobotPosition());
+			if(lc!=null) {
+				if(lc.getAreaType()==AreaType.LOGICAL)
+					GET.CentralStation().setRewardPoint(GET.locationByType(getRobotPosition(),AreaType.LOGICAL).REWARD_POINTS, this,PointSystem.B );
+				else
+					GET.CentralStation().setRewardPoint(0, this,PointSystem.B );
+				GET.CentralStation().setRewardPoint(GET.locationByType(getRobotPosition(),AreaType.PHYSICAL).REWARD_POINTS, this,PointSystem.A );
+			}else {
+				GET.CentralStation().setRewardPoint(0, this,PointSystem.A );
+				GET.CentralStation().setRewardPoint(0, this,PointSystem.B );
+			}
 		}
 		
 	}

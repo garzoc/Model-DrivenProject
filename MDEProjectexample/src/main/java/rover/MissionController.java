@@ -14,10 +14,9 @@ class MissionController extends Thread {
 	final static int NO_AREA=-1;
 	private final Strategy strategy;
 	private final RobotInterface robot;
-	private volatile int tick=0;
 
 	private int[] oldRoomIDTracker;//test
-	private boolean forcedTermination;
+	private volatile boolean forcedTermination;
 	
 	MissionController(Strategy strategy,RobotInterface robot){
 		this.strategy=strategy;
@@ -52,9 +51,7 @@ class MissionController extends Thread {
 		//boolean controllerExists=false;
 		//as long as the robot is DONE with the mission, keep looping
 		while(!forcedTermination) {
-			
-			tick=missionProgress;
-			
+						
 			robot.missionUpdate();
 			lc=GET.locationByOrder(robot.getRobotPosition());
 			testForRoom(lc);
@@ -180,8 +177,8 @@ private void setRoomOldID(AreaType areaType,int ID) {
 	private boolean checkBeforeEnter(Point2D.Double target) {//change thos method as it is not safe
 		//LocationController lc=GET.locationByOrder(target);
 		
-		/*//uncommented code checks if the robot is close to entering a new area
-		Point2D.Double currentPos=robot.getRobotPosition();
+		//uncommented code checks if the robot is close to entering a new area
+		/*Point2D.Double currentPos=robot.getRobotPosition();
 		//Y=kx+m;
 		//calculate the coefficient of the linear equation
 		double k=target.getY()==currentPos.getY()?0:(target.getY()-currentPos.getY())/(target.getX()-currentPos.getX());
@@ -204,10 +201,9 @@ private void setRoomOldID(AreaType areaType,int ID) {
 		//System.out.println("new Position X "+(currentPos.getX()+deltaX)+" Y "+(currentPos.getY()+deltaY));
 		//check if the test point is in a new room
 		LocationController test=GET.locationByType(p,AreaType.PHYSICAL);
-		if(isRoom(test)&&switchedLocation(test)) {
+		if(isRoom(test)&&switchedLocation(test.getID(),AreaType.PHYSICAL)) {
 			System.out.println("about to enter a new room "+test.getLocationName());
 		}*/
-		//double m=currentPos.getY()-currentPos.getX()*k;
 		
 		
 		LocationController lc=GET.locationByOrder(target);
