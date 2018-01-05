@@ -45,12 +45,13 @@ public class LocationController {
 		return ID;
 	}
 	
-	public void LockArea(RobotInterface robot) {
+	synchronized public void LockArea(RobotInterface robot) {
 		if(this.LocationIsAccessbile(robot)) {
+			//System.out.println("locking "+robot.getID());
 			this.owner = robot;
 		}
 	}
-	public void UnlockArea(RobotInterface robot) {
+	synchronized public void UnlockArea(RobotInterface robot) {
 		if(this.LocationIsAccessbile(robot)) {
 			this.owner = null;
 		}
@@ -61,6 +62,8 @@ public class LocationController {
 	}
 	
 	public boolean LocationIsAccessbile(RobotInterface robot) {
+		//if(this.owner!=null)
+		//System.out.println("owner ID "+owner.getID()+" robot ID "+robot.getID());
 		return this.owner==null || this.owner.getID()==robot.getID();	
 	}
 	

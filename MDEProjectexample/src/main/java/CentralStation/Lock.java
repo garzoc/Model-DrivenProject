@@ -12,7 +12,7 @@ public class Lock {
 	
 	protected void lock() {
 		this.waiting=true;
-		while(waiting) if(robot!=null &&robot.getMission()==Thread.currentThread())robot.pause(1);
+		while(waiting); //if(robot!=null &&robot.getMission()==Thread.currentThread())robot.pause(1);
 		
 		
 	}

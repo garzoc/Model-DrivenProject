@@ -54,8 +54,9 @@ class MissionController extends Thread {
 						
 			robot.missionUpdate();
 			lc=GET.locationByOrder(robot.getRobotPosition());
+			//GET.Lock(robot);
 			testForRoom(lc);
-			
+			//GET.Unlock();
 			//check if the robot has reached the Point and if next room is locked
 			//check if the room  of point that going to be reached is unlcoked
 			if(checkBeforeEnter(missionPoints[missionProgress])) {
@@ -69,6 +70,7 @@ class MissionController extends Thread {
 				}
 				robot.setDestination(missionPoints[missionProgress]);
 			}else {
+				//System.out.println("hello "+robot.getRobotName());
 				robot.pause(1);
 			}
     	   
@@ -103,11 +105,14 @@ private void setRoomOldID(AreaType areaType,int ID) {
 	
 	private void testForRoom(LocationController lc) {//change name if this method as it is unclear what it does otherwise
 		
-		int highestLayerFound;
+		int highestLayerFound=0;
 		if(isRoom(lc))
 			highestLayerFound=getLayerPriority(lc.getAreaType());
 		else
 			highestLayerFound=NO_AREA;
+		
+		
+		
 		
 		
 		for(int i=0;i<=highestLayerFound;i++) {

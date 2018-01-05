@@ -48,7 +48,7 @@ public interface RobotInterface {
 	
 	
 	
-	public int getRobotName();
+	public String getRobotName();
 
 	public void beginMission(Strategy str);
 	

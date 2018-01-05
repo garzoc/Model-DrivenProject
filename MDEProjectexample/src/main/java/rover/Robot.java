@@ -128,11 +128,12 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void onRoomSwitched(int newRoomID,int oldRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
 			//LOCK handles concurrency and make sure that robots do not lock the room at the same time
-			//System.out.println("switch Physical "+GET.locationByID(newRoomID).getLocationName());
+			//System.out.println("switch Physical "+GET.locationByID(newRoomID).getLocationName()+ " robot name "+this.getID());
 			GET.Lock(this);
 				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
 				GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
 			GET.Unlock();
+			this.pause(2000);
 			
 		}else{
 			GET.Lock(this);
@@ -145,9 +146,11 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	//Enter the area(rooms) from outside
 	public void onAreaEnter(int newRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
+			//System.out.println("entered physical "+GET.locationByID(newRoomID).getLocationName()+ " robot name "+this.getID());
 			GET.Lock(this);
 				GET.locationByID(newRoomID).LockArea(this);	
 			GET.Unlock();
+			this.pause(2000);
 			
 		}else{
 			//System.out.println("Hi Logic "+GET.locationByID(newRoomID).getLocationName());
@@ -161,7 +164,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		
 		if(areaType==AreaType.PHYSICAL) {
 			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
-			//System.out.println("bye physical "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName());
+			//System.out.println("bye physical "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName()+ " robot name "+this.getID());
 		}else{
 			//System.out.println("Bye Logic "+GET.locationByID(oldRoomID).getLocationName());
 			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
@@ -195,9 +198,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	}
 
 	@Override
-	public int getRobotName() {
-		super.getName();
-		return 0;
+	public String getRobotName() {
+		return super.getName();
 	}
 
 
