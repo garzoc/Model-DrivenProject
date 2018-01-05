@@ -285,9 +285,6 @@
         <ownedAttribute xmi:type="uml:Property" xmi:id="_xixe0O4VEeeESZWNfjhKCA" name="waiting" visibility="private">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EBoolean"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_VLSPYO4WEeeESZWNfjhKCA" name="tick" visibility="private">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EChar"/>
-        </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_LAOqkO8cEeeESZWNfjhKCA" name="robotinterface" type="_Kljl8N3zEeekPIFZ3lerAg" association="_LALAMO8cEeeESZWNfjhKCA">
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_LAQfwO8cEeeESZWNfjhKCA"/>
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_LAQfwe8cEeeESZWNfjhKCA" value="1"/>
@@ -401,9 +398,6 @@
     <packagedElement xmi:type="uml:Package" xmi:id="_iaLHIN3yEeekPIFZ3lerAg" name="rover">
       <packagedElement xmi:type="uml:Class" xmi:id="_mDiagN3yEeekPIFZ3lerAg" name="MissionController">
         <ownedAttribute xmi:type="uml:Property" xmi:id="_0Oe8oO8REeeESZWNfjhKCA" name="NO_AREA" isStatic="true">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
-        </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_JgKKgO8SEeeESZWNfjhKCA" name="tick" visibility="private">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
         </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_Oyql8O8SEeeESZWNfjhKCA" name="oldRoomIDTracker" visibility="private">
