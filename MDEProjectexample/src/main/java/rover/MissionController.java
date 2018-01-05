@@ -33,6 +33,7 @@ class MissionController extends Thread {
 		for(int i=0;i<oldRoomIDTracker.length;i++) {
 			if((lc=GET.locationByType(robot.getRobotPosition(),AreaType.values()[i]))!=null) {
 				oldRoomIDTracker[i]=lc.getID();
+				
 			}else {
 				oldRoomIDTracker[i]=NO_AREA;
 			}
@@ -51,7 +52,7 @@ class MissionController extends Thread {
 		//boolean controllerExists=false;
 		//as long as the robot is DONE with the mission, keep looping
 		while(!forcedTermination) {
-						
+			//System.out.println("hello "+robot.getRobotName());
 			robot.missionUpdate();
 			lc=GET.locationByOrder(robot.getRobotPosition());
 			//GET.Lock(robot);
@@ -70,7 +71,7 @@ class MissionController extends Thread {
 				}
 				robot.setDestination(missionPoints[missionProgress]);
 			}else {
-				System.out.println("hello "+robot.getRobotName());
+				//System.out.println("hello "+robot.getRobotName());
 				robot.pause(1);
 			}
     	   

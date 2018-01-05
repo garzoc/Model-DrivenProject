@@ -7,15 +7,16 @@ public class Lock {
 	private volatile boolean waiting=false;
 	private volatile RobotInterface robot;
 	public Lock(RobotInterface robot) {
-		robot=robot;
+		this.robot=robot;
+		this.waiting=true;
 	}
 	
 	protected void lock() {
-		this.waiting=true;
+		System.out.println("lock "+robot.getID());
 		while(waiting) {if(robot!=null &&robot.getMission()==Thread.currentThread())robot.pause(1);
-			System.out.println("noooooo");	
+			//System.out.println("lock "+robot.getID());
 		}
-		
+			System.out.println("unlock");
 		
 	}
 	

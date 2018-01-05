@@ -131,10 +131,12 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		if(areaType==AreaType.PHYSICAL) {
 			//LOCK handles concurrency and make sure that robots do not lock the room at the same time
 			//System.out.println("switch Physical "+GET.locationByID(newRoomID).getLocationName()+ " robot name "+this.getID());
-			GET.Lock(this);
+			//GET.Lock(this);
+				//System.out.println("old room "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName()+" robot "+this.getID());
+				//System.out.println("new room "+GET.CentralStation().environment.getControllerByID(newRoomID).getLocationName()+" robot "+this.getID());
 				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
 				GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
-			GET.Unlock();
+			//GET.Unlock();
 			this.pause(2000);
 			
 		}else{
@@ -149,9 +151,9 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void onAreaEnter(int newRoomID,AreaType areaType) {
 		if(areaType==AreaType.PHYSICAL) {
 			//System.out.println("entered physical "+GET.locationByID(newRoomID).getLocationName()+ " robot name "+this.getID());
-			GET.Lock(this);
+			//GET.Lock(this);
 				GET.locationByID(newRoomID).LockArea(this);	
-			GET.Unlock();
+			//GET.Unlock();
 			this.pause(2000);
 			
 		}else{
@@ -165,8 +167,10 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 	public void onAreaLeave(int oldRoomID,AreaType areaType) {
 		
 		if(areaType==AreaType.PHYSICAL) {
+			//GET.Lock(this);
 			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
 			//System.out.println("bye physical "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName()+ " robot name "+this.getID());
+			//GET.Unlock();
 		}else{
 			//System.out.println("Bye Logic "+GET.locationByID(oldRoomID).getLocationName());
 			//GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);

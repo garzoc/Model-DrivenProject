@@ -40,26 +40,27 @@ public class GET {
 	}
 	
 	public static void Lock(RobotInterface robot) {
-		//System.out.println(stateLocked);
-		boolean hasBeenProcessed=false;
-		while(!hasBeenProcessed) {
+		
+		//System.out.println("trying lock "+robot.getID());
 			Lock l;
-			if((l=tryAcquireLock(robot))!=null) 
+			if((l=tryAcquireLock(robot))!=null) { 
+				//System.out.println("lock "+robot.getID());
 				l.lock();
-			else 
-				hasBeenProcessed=true;	
-		}
+			}
+		
 		
 		
 	}
 	
 	
 	public synchronized static void Unlock() {	
+		//System.out.println("try unlocking");
 		Lock lock;
 		if(null!=(lock=locks.poll())){
 			lock.unlock();
+		}else {
+			stateLocked=false;
 		}
-		stateLocked=false;
 	}
 	//get the the locationController 
 	public static LocationController locationByOrder(Point2D.Double location) {
