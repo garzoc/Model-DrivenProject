@@ -33,37 +33,39 @@ public class Main2 {
 		
 		Color c = Color.GRAY;
 		Color red = Color.RED;
+//		Color green = Color.GREEN;
+//		Color yellow = Color.YELLOW;
 										//  y pos   a  ->  b     color
-		Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5f, e, c);
+		Boundary w1 = new HorizontalBoundary(-5.0f, -5.0f, 5f, e, red);
 
-		Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, c);
+		Boundary w2 = new HorizontalBoundary(5.0f, -5.0f, 5.0f, e, red);
 
-		Boundary w3 = new VerticalBoundary(5.0f, -2.0f, 2.0f, e, c);
+		Boundary w3 = new VerticalBoundary(5.0f, -2.0f, 2.0f, e, red);
 
-		Boundary w4 = new VerticalBoundary(-5.0f, -2.0f, 2.0f, e, c);
+		Boundary w4 = new VerticalBoundary(-5.0f, -2.0f, 2.0f, e, red);
 
-		AbstractWall roomWall1 = new HorizontalWall(0f, 2f, -2f, e, c);
+		AbstractWall roomWall1 = new HorizontalWall(0f, 2f, -2f, e, red);
 
-		AbstractWall roomWall2 = new HorizontalWall(0f, 5f, 3.5f, e, c);
+		AbstractWall roomWall2 = new HorizontalWall(0f, 5f, 3.5f, e, red);
 		//
-		AbstractWall roomWall3 = new HorizontalWall(0f, -5f, -3.5f, e, c);
+		AbstractWall roomWall3 = new HorizontalWall(0f, -5f, -3.5f, e, red);
 		//Consulting room 
 		AbstractWall roomWall = new HorizontalWall(-2f, 2f, 0f, e, red);
 		AbstractWall roomWall4 = new HorizontalWall(-2f, 5f, 3.5f, e, red);
 		
-		AbstractWall roomWall5 = new VerticalWall(0f, -2f, 2f, e, c);
+		AbstractWall roomWall5 = new VerticalWall(0f, -2f, 2f, e, red);
 
-		AbstractWall roomWall6 = new VerticalWall(5f, -5f, -3.5f, e, c);
+		AbstractWall roomWall6 = new VerticalWall(5f, -5f, -3.5f, e, red);
 		
-		AbstractWall roomWall7 = new VerticalWall(5f, 5f, 3.5f, e, c);
+		AbstractWall roomWall7 = new VerticalWall(5f, 5f, 3.5f, e, red);
 		
-		AbstractWall roomWall8 = new VerticalWall(-5f, 5f, 3.5f, e, c);
+		AbstractWall roomWall8 = new VerticalWall(-5f, 5f, 3.5f, e, red);
 		
-		AbstractWall roomWall9 = new VerticalWall(-5f, -5f, -3.5f, e, c);
+		AbstractWall roomWall9 = new VerticalWall(-5f, -5f, -3.5f, e, red);
 		
-		AbstractWall roomWall10 = new VerticalWall(0f, -5f, -3.5f, e, c);
+		AbstractWall roomWall10 = new VerticalWall(0f, -5f, -3.5f, e, red);
 		
-		AbstractWall roomWall11 = new VerticalWall(0f, 5f, 3.5f, e, c);
+		AbstractWall roomWall11 = new VerticalWall(0f, 5f, 3.5f, e, red);
 		
 		
 		
