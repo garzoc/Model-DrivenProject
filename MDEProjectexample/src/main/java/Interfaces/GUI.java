@@ -36,7 +36,8 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 	LinkedList<Integer> pointsA=new LinkedList<Integer>();
 	LinkedList<Integer> pointsB=new LinkedList<Integer>();
 	public void onRewardPointRecieved(int rewardPoints, RobotInterface robot,PointSystem pointSystem) {
-		/*if(GET.CentralStation()!=null) {
+		if(robot!=null) {
+		if(GET.CentralStation()!=null) {
 			while(GET.CentralStation().getNumberOfRobots()!=pointsA.size() || GET.CentralStation().getNumberOfRobots()!=pointsB.size()) {
 				if(GET.CentralStation().getNumberOfRobots()>pointsA.size()) pointsA.add(new Integer(0));
 				if(GET.CentralStation().getNumberOfRobots()>pointsB.size()) pointsB.add(new Integer(0));
@@ -52,7 +53,8 @@ public class GUI extends AbstractSimulatorMonitor implements Interface{
 		//System.out.println("System A has "+sum);
 		for(int i=0;i<pointsB.size();i++){
 			if(pointsB.get(i)!=0)sum+=pointsB.get(i);
-		}*/
+		}
+		}
 		//System.out.println("System B has "+sum);
 	}
 

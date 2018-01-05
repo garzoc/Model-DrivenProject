@@ -101,9 +101,11 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			if(lc!=null) {
 				if(lc.getAreaType()==AreaType.LOGICAL)
 					GET.CentralStation().setRewardPoint(GET.locationByType(getRobotPosition(),AreaType.LOGICAL).REWARD_POINTS, this,PointSystem.B );
-				else
+				else 
 					GET.CentralStation().setRewardPoint(0, this,PointSystem.B );
+				try {
 				GET.CentralStation().setRewardPoint(GET.locationByType(getRobotPosition(),AreaType.PHYSICAL).REWARD_POINTS, this,PointSystem.A );
+				}catch(Exception e) {}
 			}else {
 				GET.CentralStation().setRewardPoint(0, this,PointSystem.A );
 				GET.CentralStation().setRewardPoint(0, this,PointSystem.B );
@@ -136,10 +138,10 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			this.pause(2000);
 			
 		}else{
-			GET.Lock(this);
+			/*GET.Lock(this);
 				GET.CentralStation().environment.getControllerByID(newRoomID).LockArea(this);	
 				GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
-			GET.Unlock();
+			GET.Unlock();*/
 	
 		}
 	}
@@ -154,9 +156,9 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			
 		}else{
 			//System.out.println("Hi Logic "+GET.locationByID(newRoomID).getLocationName());
-			GET.Lock(this);
+			/*GET.Lock(this);
 				GET.locationByID(newRoomID).LockArea(this);	
-			GET.Unlock();
+			GET.Unlock();*/
 		}
 	}
 	//leave the room and go outside 
@@ -167,7 +169,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 			//System.out.println("bye physical "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName()+ " robot name "+this.getID());
 		}else{
 			//System.out.println("Bye Logic "+GET.locationByID(oldRoomID).getLocationName());
-			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
+			//GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
 		}
 	}
 	

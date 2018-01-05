@@ -53,6 +53,7 @@ public class LocationController {
 	}
 	synchronized public void UnlockArea(RobotInterface robot) {
 		if(this.LocationIsAccessbile(robot)) {
+			
 			this.owner = null;
 		}
 	}
@@ -61,7 +62,7 @@ public class LocationController {
 		return this.owner!=null;
 	}
 	
-	public boolean LocationIsAccessbile(RobotInterface robot) {
+	synchronized public boolean LocationIsAccessbile(RobotInterface robot) {
 		//if(this.owner!=null)
 		//System.out.println("owner ID "+owner.getID()+" robot ID "+robot.getID());
 		return this.owner==null || this.owner.getID()==robot.getID();	

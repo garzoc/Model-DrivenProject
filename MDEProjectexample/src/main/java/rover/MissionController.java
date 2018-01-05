@@ -70,7 +70,7 @@ class MissionController extends Thread {
 				}
 				robot.setDestination(missionPoints[missionProgress]);
 			}else {
-				//System.out.println("hello "+robot.getRobotName());
+				System.out.println("hello "+robot.getRobotName());
 				robot.pause(1);
 			}
     	   
