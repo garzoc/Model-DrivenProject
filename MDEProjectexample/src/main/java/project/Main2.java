@@ -71,13 +71,17 @@ public class Main2 {
 		
 		Set <Robot> robots = new HashSet<>();
 		LocationController [] controllers = {
-			new LocationController(-5,0,5,5,AreaType.PHYSICAL,"Room1",5),	
+			new LocationController(-5,2,5,3,AreaType.PHYSICAL,"Sugery Room1",5),	
+			new LocationController(-5,0,5,2,AreaType.PHYSICAL,"Consulting Room1",5),
+			new LocationController(0,0,5,5,AreaType.PHYSICAL, "Surgery Room2",5),
+			new LocationController(-5,-5,5,5,AreaType.PHYSICAL, "Surgery Room3",5),
+			new LocationController(0,-5,5,5,AreaType.PHYSICAL, "Surgery Room4", 5)
 		};
 		
-		Robot robot1 = new Robot(new Point2D.Double(7, -3), "Robot 1");
-		Robot robot2 = new Robot(new Point2D.Double(-7,-3 ), "Robot 2");
-		Robot robot3 = new Robot(new Point2D.Double(-7, 3), "Robot 3");
-		Robot robot4 = new Robot(new Point2D.Double(7, 3), "Robot 4");
+		Robot robot1 = new Robot(new Point2D.Double(-3, 4), "Robot 1");
+		Robot robot2 = new Robot(new Point2D.Double(3, 3), "Robot 2");
+		Robot robot3 = new Robot(new Point2D.Double(-3, -3), "Robot 3");
+		Robot robot4 = new Robot(new Point2D.Double(3,-3), "Robot 4");
 		
 		robots.add(robot1);
 		robots.add(robot2);
@@ -93,23 +97,23 @@ public class Main2 {
 		GET.CentralStation().attachNewRobot(robot4);
 
 		//plans need to be rewritten with new coordinates
-		Point2D.Double[] pl1 = {new Point2D.Double(3,-3), new Point2D.Double(-4,-3), new Point2D.Double(-7,-3)};
-		Point2D.Double[] pl2 = {new Point2D.Double(-2.5,-3), new Point2D.Double(-2.5,3), new Point2D.Double(-7,3)};
-		Point2D.Double[] pl3 = {new Point2D.Double(-3,3), new Point2D.Double(3,3), new Point2D.Double(7,3)};
-		Point2D.Double[] pl4 = {new Point2D.Double(2.5,3), new Point2D.Double(2.5,-3), new Point2D.Double(7,-3)};
+		Point2D.Double[] pl1 = {new Point2D.Double(-3,0.5), new Point2D.Double(-3,4)};
+		Point2D.Double[] pl2 = {new Point2D.Double(-3,0.5), new Point2D.Double(3,4)};
+//		Point2D.Double[] pl3 = {new Point2D.Double(-3,3), new Point2D.Double(3,3), new Point2D.Double(7,3)};
+//		Point2D.Double[] pl4 = {new Point2D.Double(2.5,3), new Point2D.Double(2.5,-3), new Point2D.Double(7,-3)};
 		
 
 		Strategy plan1 = new Strategy(pl1);
 		Strategy plan2 = new Strategy(pl2);
-		Strategy plan3 = new Strategy(pl3);
-		Strategy plan4 = new Strategy(pl4);
+		//Strategy plan3 = new Strategy(pl3);
+		//Strategy plan4 = new Strategy(pl4);
 		
 		
 		GET.CentralStation().getRobot(0).beginMission(plan1);
 		System.out.println("runnong second robot");
 		GET.CentralStation().getRobot(1).beginMission(plan2);
 		System.out.println("running thrid robot");
-		GET.CentralStation().getRobot(2).beginMission(plan3);
+//		GET.CentralStation().getRobot(2).beginMission(plan3);
 		System.out.println("running forth robot");
 	}
 
