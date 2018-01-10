@@ -66,11 +66,11 @@ public class Main {
 		Set<Robot> robots = new HashSet<>();
 		//Assign the property for each room to a LocationController  
 		LocationController[] controllers = {
-				new LocationController(-5,0,5,5,AreaType.PHYSICAL,"Room1",5), 
-				new LocationController(0,0,5,5,AreaType.PHYSICAL,"Room2",5), 
-				new LocationController(-5,-5,5,5,AreaType.PHYSICAL,"Room3",5), 
-				new LocationController(0,-5,5,5,AreaType.PHYSICAL,"Room4",5),
-				new LocationController(0,-5,3,3,AreaType.LOGICAL,"Room5",5)};
+				new LocationController(-5,0,5,5,AreaType.PHYSICAL,"Office",1), 
+				new LocationController(0,0,5,5,AreaType.PHYSICAL,"TeachingRoom",2), 
+				new LocationController(-5,-5,5,5,AreaType.PHYSICAL,"Eating area",2), 
+				new LocationController(0,-5,5,5,AreaType.PHYSICAL,"Bathroom",1),
+				new LocationController(0,-5,3,3,AreaType.LOGICAL,"WIFI",1)};
 		
 		/*LocationController[] controllers = {
 				new LocationController(-5,0,5,5,AreaType.LOGICAL,"Room1",5), 

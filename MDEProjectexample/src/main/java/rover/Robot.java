@@ -104,8 +104,8 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 				else 
 					GET.CentralStation().setRewardPoint(0, this,PointSystem.B );
 				try {
-				GET.CentralStation().setRewardPoint(GET.locationByType(getRobotPosition(),AreaType.PHYSICAL).REWARD_POINTS, this,PointSystem.A );
-				}catch(Exception e) {}
+					GET.CentralStation().setRewardPoint(GET.locationByType(getRobotPosition(),AreaType.PHYSICAL).REWARD_POINTS, this,PointSystem.A );
+				}catch(Exception e) {GET.CentralStation().setRewardPoint(0, this,PointSystem.A );}
 			}else {
 				GET.CentralStation().setRewardPoint(0, this,PointSystem.A );
 				GET.CentralStation().setRewardPoint(0, this,PointSystem.B );
@@ -168,6 +168,7 @@ public class Robot extends AbstractRobotSimulator implements RobotInterface {
 		
 		if(areaType==AreaType.PHYSICAL) {
 			//GET.Lock(this);
+		
 			GET.CentralStation().environment.getControllerByID(oldRoomID).UnlockArea(this);
 			//System.out.println("bye physical "+GET.CentralStation().environment.getControllerByID(oldRoomID).getLocationName()+ " robot name "+this.getID());
 			//GET.Unlock();

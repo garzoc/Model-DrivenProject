@@ -64,10 +64,13 @@ public class InputManager implements Runnable{
 	}
 		
 	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void run() {
+		
 		// TODO Auto-generated method stub
+		System.out.println("trying");
 		Scanner scanner = new Scanner( System.in );
 
 	    // 2. Don't forget to prompt the user
@@ -75,11 +78,12 @@ public class InputManager implements Runnable{
 	    System.out.println( "{command:changePath|robotID:3|path:[2.5,3,2.5,-3,7,-3]}" );
 	    System.out.println( "{command:stop|robotID:2}");
 	    System.out.println( "{command:stopALL}" );
+	    System.out.println( "{command:close}" );
 	   // {new Point2D.Double(2.5,3), new Point2D.Double(2.5,-3), new Point2D.Double(7,-3)};
 
 	    // 3. Use the Scanner to read a line of text from the user.
-	   
-	    while(true) {
+	   boolean terminate=false;
+	    while(!terminate) {
 	    		String input = scanner.nextLine();
 	    		if(input!="stop") {
 	    		LinkedList ls;
@@ -93,7 +97,7 @@ public class InputManager implements Runnable{
 	    					ls.addAll(split((String)ls.poll(),':'));//Unsafe type casting
 	    				}
 	    				
-	    				switch(getValue(ls,"command")){
+	    				switch(getValue(ls,"command").trim()){
 	    					case "stop":
 	    						GET.CentralStation().getRobot(Integer.parseInt(getValue(ls,"robotID"))).termiateMission();
 	    						break;
@@ -101,22 +105,27 @@ public class InputManager implements Runnable{
 	    						Strategy x=new Strategy(createPathFromArray(getValue(ls,"path")));
 	    						GET.CentralStation().getRobot(Integer.parseInt(getValue(ls,"robotID"))).overwriteMission(x);
 	    						break;
-	    					case "stopAll":
+	    					case "stopALL":
 	    						for(int i=0;i<GET.CentralStation().getNumberOfRobots();i++)GET.CentralStation().getRobot(i).termiateMission();
 	    						break;
+	    					case "close":
+	    						terminate=true;
+	    						break;
 	    					default:
-	    						System.out.println("unrecognaized command");
+	    						System.out.println("unrecognaized command "+getValue(ls,"command"));
 	    					break;
 	    				}
 	    			}
-	    
+	    		
+	    			
 	    			// 4. Now, you can do anything with the input string that you need to.
 	    			// Like, output it to the user.
 	    			System.out.println(input);
 	    		}
+	    		
 	    }
 	   
-
+	    scanner.close();
 	}
 
 }

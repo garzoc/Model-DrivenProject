@@ -122,6 +122,9 @@ public class Main2 {
 		GET.CentralStation().getRobot(2).beginMission(plan3);
 		System.out.println("running forth robot");
 		GET.CentralStation().getRobot(3).beginMission(plan4);
+		
+		InputManager i=new InputManager();
+		i.run();
 	}
 
 }

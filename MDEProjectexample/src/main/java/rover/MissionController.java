@@ -131,15 +131,17 @@ private void setRoomOldID(AreaType areaType,int ID) {
 			}else if(switchedLocation(NO_AREA,AreaType.values()[i])) {
 				robot.onAreaLeave(getOldRoomID(AreaType.values()[i]),AreaType.values()[i]);
 				setRoomOldID(AreaType.values()[i],NO_AREA);
-			}
+			}/*else {
+				System.out.println("leaving ");
+			}*/
 		}
 		
-		/*for(int i=highestLayerFound+1;i<AreaType.values().length;i++) {
+		for(int i=highestLayerFound+1;i<AreaType.values().length;i++) {
 			if(switchedLocation(NO_AREA,AreaType.values()[i])) {
 				robot.onAreaLeave(getOldRoomID(AreaType.values()[i]),AreaType.values()[i]);
 				setRoomOldID(AreaType.values()[i],NO_AREA);
 			}
-		}*/
+		}
 	}
 	
 	
